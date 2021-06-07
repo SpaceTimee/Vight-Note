@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.IO;
 using System.Diagnostics;
+using System.Net.NetworkInformation;
 
 namespace Vight_Note
 {
@@ -23,6 +24,7 @@ namespace Vight_Note
             public const string DEVELOPER = "Space Time";
             public const string EMAIL = "Zeus6_6@163.com";
             public const string RELEASEURL = "https://spacetime.lanzous.com/b01666yti";
+            public const string POLICYURL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
             public const string RELEASEPASSWORD = "3a57";
         }
 
@@ -364,7 +366,30 @@ emmmm...
 
         private void PrivacyPolicy_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(Properties.Resources.Vight_Note_Privacy_Policy);
+            bool viewOnLine = false;
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = ping.Send("thoughts.teambition.com"); //判断是否能连接到thought
+                if (reply.Status == IPStatus.Success)   //连接成功
+                {
+                    viewOnLine = true;
+                    if (!LiteMode.Checked && MessageBox.Show("是否选择在线文档(推荐)", "已连接网络", MessageBoxButtons.YesNo) == DialogResult.No)
+                        viewOnLine = false;
+                }
+                else
+                    throw new Exception("NetworkError");
+            }
+            catch   //连接失败
+            {
+                viewOnLine = false;
+                if (!LiteMode.Checked && MessageBox.Show("是否选择本地文档", "未连接网络", MessageBoxButtons.YesNo) == DialogResult.No)
+                    viewOnLine = true;
+            }
+            if (viewOnLine)
+                Process.Start(Define.POLICYURL);
+            else
+                MessageBox.Show(Properties.Resources.Vight_Note_Privacy_Policy);
         }
 
         //拖放
