@@ -54,6 +54,7 @@ namespace Vight_Note
             this.Update = new System.Windows.Forms.ToolStripMenuItem();
             this.PrivacyPolicy = new System.Windows.Forms.ToolStripMenuItem();
             this.About = new System.Windows.Forms.ToolStripMenuItem();
+            this.Export = new System.Windows.Forms.ToolStripMenuItem();
             this.TextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,9 +75,9 @@ namespace Vight_Note
             this.TextBox.Size = new System.Drawing.Size(404, 438);
             this.TextBox.TabIndex = 0;
             this.TextBox.TabStop = false;
+            this.TextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.TextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
             this.TextBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
-            this.TextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // TextMenu
             // 
@@ -88,6 +89,7 @@ namespace Vight_Note
             this.Close,
             this.toolStripSeparator1,
             this.Save,
+            this.Export,
             this.Import,
             this.toolStripSeparator2,
             this.ImproveOpacity,
@@ -104,13 +106,14 @@ namespace Vight_Note
             this.TextMenu.Name = "TextMenu";
             this.TextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.TextMenu.ShowCheckMargin = true;
-            this.TextMenu.Size = new System.Drawing.Size(339, 592);
+            this.TextMenu.Size = new System.Drawing.Size(358, 632);
+            this.TextMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TextMenu_PreviewKeyDown);
             // 
             // Create
             // 
             this.Create.Image = global::Vight_Note.Properties.Resources.Create;
             this.Create.Name = "Create";
-            this.Create.Size = new System.Drawing.Size(338, 40);
+            this.Create.Size = new System.Drawing.Size(377, 40);
             this.Create.Text = "创建窗口 (Ctrl+N)";
             this.Create.Click += new System.EventHandler(this.Create_Click);
             // 
@@ -118,20 +121,20 @@ namespace Vight_Note
             // 
             this.Close.Image = global::Vight_Note.Properties.Resources.Close;
             this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(338, 40);
+            this.Close.Size = new System.Drawing.Size(377, 40);
             this.Close.Text = "关闭窗口 (Esc)";
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(335, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(374, 6);
             // 
             // Save
             // 
             this.Save.Image = global::Vight_Note.Properties.Resources.Save;
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(338, 40);
+            this.Save.Size = new System.Drawing.Size(377, 40);
             this.Save.Text = "保存文件 (Ctrl+S)";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
@@ -139,41 +142,41 @@ namespace Vight_Note
             // 
             this.Import.Image = global::Vight_Note.Properties.Resources.Import;
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(338, 40);
+            this.Import.Size = new System.Drawing.Size(377, 40);
             this.Import.Text = "导入文件 (Ctrl+O)";
             this.Import.Click += new System.EventHandler(this.Import_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(335, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(374, 6);
             // 
             // ImproveOpacity
             // 
             this.ImproveOpacity.Image = global::Vight_Note.Properties.Resources.Improve;
             this.ImproveOpacity.Name = "ImproveOpacity";
-            this.ImproveOpacity.Size = new System.Drawing.Size(338, 40);
-            this.ImproveOpacity.Text = "透明度+";
+            this.ImproveOpacity.Size = new System.Drawing.Size(357, 40);
+            this.ImproveOpacity.Text = "透明度+ (Ctrl+Alt+I)";
             this.ImproveOpacity.Click += new System.EventHandler(this.ImproveOpacity_Click);
             // 
             // ReduceOpacity
             // 
             this.ReduceOpacity.Image = global::Vight_Note.Properties.Resources.Reduce;
             this.ReduceOpacity.Name = "ReduceOpacity";
-            this.ReduceOpacity.Size = new System.Drawing.Size(338, 40);
-            this.ReduceOpacity.Text = "透明度-";
+            this.ReduceOpacity.Size = new System.Drawing.Size(357, 40);
+            this.ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
             this.ReduceOpacity.Click += new System.EventHandler(this.ReduceOpacity_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(335, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(374, 6);
             // 
             // AlwaysTop
             // 
             this.AlwaysTop.Image = global::Vight_Note.Properties.Resources.Top;
             this.AlwaysTop.Name = "AlwaysTop";
-            this.AlwaysTop.Size = new System.Drawing.Size(338, 40);
+            this.AlwaysTop.Size = new System.Drawing.Size(377, 40);
             this.AlwaysTop.Text = "置顶窗口";
             this.AlwaysTop.Click += new System.EventHandler(this.AlwaysTop_Click);
             // 
@@ -181,7 +184,7 @@ namespace Vight_Note
             // 
             this.LockTextBox.Image = global::Vight_Note.Properties.Resources.Unlock;
             this.LockTextBox.Name = "LockTextBox";
-            this.LockTextBox.Size = new System.Drawing.Size(338, 40);
+            this.LockTextBox.Size = new System.Drawing.Size(377, 40);
             this.LockTextBox.Text = "锁定输入";
             this.LockTextBox.Click += new System.EventHandler(this.LockTextBox_Click);
             // 
@@ -189,7 +192,7 @@ namespace Vight_Note
             // 
             this.DarkMode.Image = global::Vight_Note.Properties.Resources.Dark;
             this.DarkMode.Name = "DarkMode";
-            this.DarkMode.Size = new System.Drawing.Size(338, 40);
+            this.DarkMode.Size = new System.Drawing.Size(377, 40);
             this.DarkMode.Text = "夜间模式";
             this.DarkMode.Click += new System.EventHandler(this.DarkMode_Click);
             // 
@@ -197,7 +200,7 @@ namespace Vight_Note
             // 
             this.ScrollBar.Image = global::Vight_Note.Properties.Resources.Scroll;
             this.ScrollBar.Name = "ScrollBar";
-            this.ScrollBar.Size = new System.Drawing.Size(338, 40);
+            this.ScrollBar.Size = new System.Drawing.Size(377, 40);
             this.ScrollBar.Text = "显示滚动条";
             this.ScrollBar.Click += new System.EventHandler(this.ScrollBar_Click);
             // 
@@ -205,7 +208,7 @@ namespace Vight_Note
             // 
             this.OpenBorder.Image = global::Vight_Note.Properties.Resources.Border;
             this.OpenBorder.Name = "OpenBorder";
-            this.OpenBorder.Size = new System.Drawing.Size(338, 40);
+            this.OpenBorder.Size = new System.Drawing.Size(377, 40);
             this.OpenBorder.Text = "隐藏边框";
             this.OpenBorder.Click += new System.EventHandler(this.OpenBorder_Click);
             // 
@@ -213,14 +216,14 @@ namespace Vight_Note
             // 
             this.LiteMode.Image = ((System.Drawing.Image)(resources.GetObject("LiteMode.Image")));
             this.LiteMode.Name = "LiteMode";
-            this.LiteMode.Size = new System.Drawing.Size(338, 40);
+            this.LiteMode.Size = new System.Drawing.Size(357, 40);
             this.LiteMode.Text = "轻模式";
             this.LiteMode.Click += new System.EventHandler(this.LiteMode_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(335, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(374, 6);
             // 
             // Help
             // 
@@ -231,7 +234,7 @@ namespace Vight_Note
             this.About});
             this.Help.Image = global::Vight_Note.Properties.Resources.Help;
             this.Help.Name = "Help";
-            this.Help.Size = new System.Drawing.Size(338, 40);
+            this.Help.Size = new System.Drawing.Size(377, 40);
             this.Help.Text = "帮助";
             // 
             // WhatIsLiteMode
@@ -266,6 +269,14 @@ namespace Vight_Note
             this.About.Text = "关于";
             this.About.Click += new System.EventHandler(this.About_Click);
             // 
+            // Export
+            // 
+            this.Export.Image = global::Vight_Note.Properties.Resources.Export;
+            this.Export.Name = "Export";
+            this.Export.Size = new System.Drawing.Size(377, 40);
+            this.Export.Text = "导出文件 (Alt+S)";
+            this.Export.Click += new System.EventHandler(this.Export_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -274,11 +285,13 @@ namespace Vight_Note
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(404, 438);
             this.Controls.Add(this.TextBox);
+            this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(300, 71);
             this.Name = "MainForm";
             this.Opacity = 0.85D;
             this.ShowIcon = false;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.TextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -310,6 +323,7 @@ namespace Vight_Note
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem PrivacyPolicy;
+        private System.Windows.Forms.ToolStripMenuItem Export;
     }
 }
 

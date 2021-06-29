@@ -113,6 +113,16 @@ namespace Vight_Note.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap Export {
+            get {
+                object obj = ResourceManager.GetObject("Export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap Help {
             get {
                 object obj = ResourceManager.GetObject("Help", resourceCulture);
@@ -231,14 +241,15 @@ namespace Vight_Note.Properties {
         }
         
         /// <summary>
-        ///   查找类似 Vight Note 由 Space Time 开发运营，涉及具体产品服务的，将由有资质的服务商提供。隐私权是每个人的重要权利，Vight Note（下称“我们”）非常重视用户个人信息和隐私的保护。在使用Vight Note前，请您务必仔细阅读并透彻理解Vight Note《隐私政策》（下称“本隐私政策”、“本政策”）。我们希望通过本隐私政策向您说明我们在您使用Vight Note产品与服务时如何收集、使用、保存、共享和转让这些信息，以及我们为您提供的访问、更新、删除和保护这些信息的方式。如果您是18周岁以下的未成年人，您应确保您的监护人阅读并同意本政策后，您才使用本软件。
-        ///最近更新日期：2021年3月27日。
+        ///   查找类似 [Vight Note 隐私政策]
+        ///
+        ///Vight Note 由 Space Time 开发运营，涉及具体产品服务的，将由有资质的服务商提供。隐私权是每个人的重要权利，Vight Note 开发团队（下称“我们”）非常重视用户个人信息和隐私的保护。在使用Vight Note前，请您务必仔细阅读并透彻理解Vight Note《隐私政策》（下称“本隐私政策”、“本政策”）。我们希望通过本隐私政策向您说明我们在您使用Vight Note产品与服务时如何收集、使用、保存、共享和转让这些信息，以及我们为您提供的访问、更新、删除和保护这些信息的方式。如果您是18周岁以下的未成年人，您应确保您的监护人阅读并同意本政策后，您才使用本软件。
+        ///最近更新日期：2021年6月7日
         ///如果您有任何疑问、意见或建议，请通过以下联系方式与我们联系：
         ///电子邮件：Zeus6_6@163.com
         ///
-        ///【特别提示】
-        ///
-        ///为了更好保护您的个人信息，请在使用Vight Note产品与服务前，仔细阅读并充分了解本政策。一旦您使用或继续使用Vight Note产品与服务，即表示您同意我们按照本政策处理您的相关信息。一旦您同意提供您的个人信息，我们将按本政策所述的目的和方式处理您的个人信息。我 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        ///特别提示:
+        ///为了更好保护您的个人信息，请在使用Vight Note产品与服务前，仔细阅读并充分了解本政策。一旦您使用或继续使用Vight Note产品与服务，即表示您同意我们按照本政策处理您的相关信息。一旦您同意提供您的个人信息，我们将按 [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         internal static string Vight_Note_Privacy_Policy {
             get {

@@ -26,28 +26,75 @@ namespace Vight_Note
             public const string RELEASEURL = "https://spacetime.lanzous.com/b01666yti";
             public const string POLICYURL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
             public const string RELEASEPASSWORD = "3a57";
+
+            public static bool CHANGEMARK = false;
+            public static string FILEPATH = "";
         }
 
         public MainForm(string[] args)
         {
             InitializeComponent();
 
-            Welcome();  //首次欢迎界面
+            //欢迎界面和界面初始化
+            MainFormInit();
 
-            CheckOpacity();
-            CheckDarkMode();
-            CheckLiteMode();
-
-            if (args.Length >= 1)   //拖拽至图标打开文件
-                ImportFile(args[0]);
+            //拖拽至图标打开文件
+            if (args.Length >= 1)
+            {
+                Define.FILEPATH = args[0];
+                ImportFile();
+            }
         }
+        private void MainFormInit()
+        {
+            //判断IsFirstRun的值(位于App.config中)
+            if (ConfigurationManager.AppSettings["IsFirstRun"].ToLower() == "true")
+            {
+                //是第一次运行
+                Welcome();
+            }
+            else
+            {
+                //不是第一次运行
+                CheckOpacity();
+                CheckDarkMode();
+                CheckLiteMode();
+            }
+        }
+        private void Welcome()
+        {
+            //显示欢迎界面
+            MessageBox.Show
+            (
+$@"在我的印象里，这似乎是你第一次使用我
+emmmm...
+很高兴认识你，我的主人(脸红)
+那个...我是{Define.NAME}
+这是{Define.DEVELOPER}给我起的名字
+哦，忘记告诉你了，那是我的开发者
+偷偷告诉你哦
+我已经有很多好用的小功能了
+啊...现在是看不到的啦
+它们都藏在便签界面的右键菜单里
+等会儿一定要去试试啊
+啊，似乎耽误你太多时间了
+准备好了就点确定吧"
+            );
 
+            AboutMe();
+
+            //将IsFirstRun置为false
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings.Remove("IsFirstRun");
+            config.AppSettings.Settings.Add("IsFirstRun", "false");
+            config.Save();
+
+        }
         private void CheckOpacity()
         {
             //设定Opacity的值
             this.Opacity = Convert.ToDouble(ConfigurationManager.AppSettings["Opacity"]);
         }
-
         private void CheckDarkMode()
         {
             //判断IsDarkMode的值(位于App.config中)
@@ -70,7 +117,6 @@ namespace Vight_Note
                 TextMenu.BackColor = Color.Gray;
             }
         }
-
         private void CheckLiteMode()
         {
             //判断IsLiteMode的值(位于App.config中)
@@ -96,39 +142,6 @@ namespace Vight_Note
             }
         }
 
-        private void Welcome()
-        {
-            //判断IsFirstRun的值(位于App.config中)
-            if (ConfigurationManager.AppSettings["IsFirstRun"].ToLower() == "true")
-            {
-                //第一次运行
-                MessageBox.Show
-                (
-$@"在我的印象里，这似乎是你第一次使用我
-emmmm...
-很高兴认识你，我的主人(脸红)
-那个...我是{Define.NAME}
-这是{Define.DEVELOPER}给我起的名字
-哦，忘记告诉你了，那是我的开发者
-偷偷告诉你哦
-我已经有很多好用的小功能了
-啊...现在是看不到的啦
-它们都藏在便签界面的右键菜单里
-等会儿一定要去试试啊
-啊，似乎耽误你太多时间了
-准备好了就点确定吧"
-                );
-
-                AboutMe();
-
-                //将IsFirstRun置为false
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("IsFirstRun");
-                config.AppSettings.Settings.Add("IsFirstRun", "false");
-                config.Save();
-            }
-        }
-
         private void Create_Click(object sender, EventArgs e)
         {
             if (File.Exists(Define.EXENAME))
@@ -136,43 +149,55 @@ emmmm...
             else
                 MessageBox.Show("创建失败，可能是文件路径损坏导致的，重新安装可能可以解决哦");
         }
-
         private void Close_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void Save_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveDialog = new SaveFileDialog();
-
-            #region 配置saveDialog的参数
-            saveDialog.Title = "Vight Saver";
-            saveDialog.RestoreDirectory = true; //自动填充用户上次选择的目录
-            saveDialog.FileName = "无名文件";   //默认文件名
-            saveDialog.Filter = "文本文件 (*.txt)|*.txt|Vight Text (*.vtxt)|*.vtxt";
-            saveDialog.FilterIndex = 1; //默认txt
-            saveDialog.AddExtension = true; //无后缀时自动增加后缀
-            saveDialog.CheckFileExists = false;  //不检查文件是否正确
-            saveDialog.CheckPathExists = true;  //检查路径是否正确
-            saveDialog.SupportMultiDottedExtensions = true; //支持多拓展名
-            saveDialog.AutoUpgradeEnabled = true;   //自动升级对话框样式
-            #endregion
-
-            if (saveDialog.ShowDialog() == DialogResult.OK)
+            //显示文件保存窗口，向用户获取保存路径
+            if (sender == Export || Define.FILEPATH == "")
             {
-                string filePath = saveDialog.FileName.ToString();   //文件路径
+                SaveFileDialog saveDialog = new SaveFileDialog();
 
-                FileStream saver = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
-                StreamWriter writer = new StreamWriter(saver);
+                #region 配置saveDialog的参数
+                saveDialog.Title = "Vight Saver";
+                saveDialog.RestoreDirectory = true; //自动填充用户上次选择的目录
+                saveDialog.FileName = "无题";   //默认文件名
+                saveDialog.Filter = "文本文件 (*.txt)|*.txt|Vight Text (*.vtxt)|*.vtxt";
+                saveDialog.FilterIndex = 1; //默认txt
+                saveDialog.AddExtension = true; //无后缀时自动增加后缀
+                saveDialog.CheckFileExists = false;  //不检查文件是否正确
+                saveDialog.CheckPathExists = true;  //检查路径是否正确
+                saveDialog.SupportMultiDottedExtensions = true; //支持多拓展名
+                saveDialog.AutoUpgradeEnabled = true;   //自动升级对话框样式
+                #endregion
 
-                writer.Write(TextBox.Text);
-                writer.Flush();
-                writer.Close();
-                saver.Close();
+                if (saveDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
+                else
+                {
+                    Define.FILEPATH = saveDialog.FileName.ToString();   //文件路径
+                }
             }
-        }
 
+            //写文件
+            FileStream saver = new FileStream(Define.FILEPATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            StreamWriter writer = new StreamWriter(saver);
+            writer.Write(TextBox.Text);
+            writer.Flush();
+            writer.Close();
+            saver.Close();
+
+            this.Text = Path.GetFileName(Define.FILEPATH);
+            Define.CHANGEMARK = false;
+        }
+        private void Export_Click(object sender, EventArgs e)
+        {
+            Save_Click(Export, new EventArgs());
+        }
         private void Import_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
@@ -195,11 +220,10 @@ emmmm...
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                string filePath = openDialog.FileName.ToString();   //文件路径
-                ImportFile(filePath);
+                Define.FILEPATH = openDialog.FileName.ToString();   //文件路径
+                ImportFile();
             }
         }
-
         private void ImproveOpacity_Click(object sender, EventArgs e)
         {
             if (this.Opacity >= 0.2)
@@ -212,7 +236,6 @@ emmmm...
                 config.Save();
             }
         }
-
         private void ReduceOpacity_Click(object sender, EventArgs e)
         {
             this.Opacity += 0.05;
@@ -222,13 +245,11 @@ emmmm...
             config.AppSettings.Settings.Add("Opacity", Convert.ToString(this.Opacity));
             config.Save();
         }
-
         private void AlwaysTop_Click(object sender, EventArgs e)
         {
             AlwaysTop.Checked = !AlwaysTop.Checked;
             this.TopMost = !this.TopMost;
         }
-
         private void LockTextBox_Click(object sender, EventArgs e)
         {
             if (!LockTextBox.Checked)
@@ -246,7 +267,6 @@ emmmm...
                 TextBox.ReadOnly = !TextBox.ReadOnly;
             }
         }
-
         private void DarkMode_Click(object sender, EventArgs e)
         {
             if (!DarkMode.Checked)
@@ -276,7 +296,6 @@ emmmm...
                 TextMenu.BackColor = Color.White;
             }
         }
-
         private void ScrollBar_Click(object sender, EventArgs e)
         {
             if (TextBox.ScrollBars == ScrollBars.None)
@@ -292,7 +311,6 @@ emmmm...
                 TextBox.ScrollBars = ScrollBars.None;
             }
         }
-
         private void OpenBorder_Click(object sender, EventArgs e)
         {
             if (this.FormBorderStyle == FormBorderStyle.Sizable)
@@ -308,7 +326,6 @@ emmmm...
                 this.FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
-
         private void LiteMode_Click(object sender, EventArgs e)
         {
             if (!LiteMode.Checked)
@@ -323,7 +340,10 @@ emmmm...
                 Create.Text = "创建窗口 (N)";
                 //Close.Text不变
                 Save.Text = "保存文件 (S)";
+                Export.Text = "导出文件 (S)";
                 Import.Text = "导入文件 (O)";
+                ImproveOpacity.Text = "透明度+ (I)";
+                ReduceOpacity.Text = "透明度- (D)";
             }
             else
             {
@@ -337,10 +357,12 @@ emmmm...
                 Create.Text = "创建窗口 (Ctrl+N)";
                 //Close.Text不变
                 Save.Text = "保存文件 (Ctrl+S)";
+                Export.Text = "导出文件 (Alt+S)";
                 Import.Text = "导入文件 (Ctrl+O)";
+                ImproveOpacity.Text = "透明度+ (Ctrl+Alt+I)";
+                ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
             }
         }
-
         private void Update_Click(object sender, EventArgs e)
         {
             if (!LiteMode.Checked)
@@ -353,17 +375,14 @@ emmmm...
             }
             Process.Start(Define.RELEASEURL);
         }
-
         private void About_Click(object sender, EventArgs e)
         {
             AboutMe();
         }
-
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
         {
             MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，增加办公效率");
         }
-
         private void PrivacyPolicy_Click(object sender, EventArgs e)
         {
             bool viewOnLine = false;
@@ -389,7 +408,10 @@ emmmm...
             if (viewOnLine)
                 Process.Start(Define.POLICYURL);
             else
-                MessageBox.Show(Properties.Resources.Vight_Note_Privacy_Policy);
+            {
+                PrivacyForm privacyForm = new PrivacyForm();
+                privacyForm.Show();
+            }
         }
 
         //拖放
@@ -409,43 +431,90 @@ emmmm...
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] path = (string[])e.Data.GetData(DataFormats.FileDrop);
-                ImportFile(path[0]);
+                Define.FILEPATH = path[0];
+                ImportFile();
             }
         }
-
         //热键
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (LockTextBox.Checked)
                 return;
 
-            if (e.Control && e.KeyCode == Keys.E)
-            {
-                //切换右键(普通)/(功能)菜单
-                TextBox.ContextMenuStrip = TextBox.ContextMenuStrip == null ? TextMenu : null;
-            }
-            if (e.Control && e.KeyCode == Keys.N)
-            {
-                //创建窗口
-                Create_Click(Create, new EventArgs());
-            }
+            if (e.Control && e.Alt && e.KeyCode == Keys.E)
+                TextBox.ContextMenuStrip = TextBox.ContextMenuStrip == null ? TextMenu : null;  //切换右键(普通)/(功能)菜单
+            else if (e.Control && e.KeyCode == Keys.N)
+                Create_Click(Create, new EventArgs());  //创建窗口
             else if (e.KeyCode == Keys.Escape)
-            {
-                //关闭窗口
-                Close_Click(Close, new EventArgs());
-            }
+                Close_Click(Close, new EventArgs());    //关闭窗口
             else if (e.Control && e.KeyCode == Keys.S)
-            {
-                //保存文件
-                Save_Click(Save, new EventArgs());
-            }
+                Save_Click(Save, new EventArgs());  //保存文件
+            else if (e.Alt && e.KeyCode == Keys.S)
+                Export_Click(Export, new EventArgs());  //导出文件(另存为)
             else if (e.Control && e.KeyCode == Keys.O)
+                Import_Click(Import, new EventArgs());  //导入文件
+            else if (e.Control && e.Alt && e.KeyCode == Keys.I)
+                ImproveOpacity_Click(ImproveOpacity, new EventArgs());  //透明度+
+            else if (e.Control && e.Alt && e.KeyCode == Keys.D)
+                ReduceOpacity_Click(ReduceOpacity, new EventArgs());    //透明度-
+        }
+        private void TextMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (LockTextBox.Checked)
+                return;
+
+            if (e.Control && e.KeyCode == Keys.N)
+                Create_Click(Create, new EventArgs());  //创建窗口
+            else if (e.KeyCode == Keys.Escape)
+                Close_Click(Close, new EventArgs());    //关闭窗口
+            else if (e.Control && e.KeyCode == Keys.S)
+                Save_Click(Save, new EventArgs());  //保存文件
+            else if (e.Control && e.KeyCode == Keys.O)
+                Import_Click(Import, new EventArgs());  //导入文件
+        }
+
+        //文件未保存标记
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!Define.CHANGEMARK)
             {
-                //导入文件
-                Import_Click(Import, new EventArgs());
+                this.Text += "*";
+                Define.CHANGEMARK = true;
             }
         }
 
+        //导入
+        private void ImportFile()
+        {
+            //特殊情况采取的特殊行为
+            if (LockTextBox.Checked)
+                return;
+
+            if (!System.IO.File.Exists(Define.FILEPATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILEPATH) != ".txt" && Path.GetExtension(Define.FILEPATH) != ".vtxt")))
+            {
+                //非正常后缀提示
+                MessageBox.Show("请不要往我里面塞奇怪的东西...");
+            }
+
+            if (!LiteMode.Checked && TextBox.Text != "")
+            {
+                //便签有内容，提示用户是否覆盖
+                MessageBoxButtons msgButton = MessageBoxButtons.YesNo;
+
+                if (MessageBox.Show("呃...已经有东西了，确定要覆盖吗？", $"{Define.NAME} 的提醒", msgButton) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            //读文件
+            FileStream importer = new FileStream(Define.FILEPATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            StreamReader reader = new StreamReader(importer);
+            TextBox.Text = reader.ReadToEnd();
+
+            this.Text = Path.GetFileName(Define.FILEPATH);
+            Define.CHANGEMARK = false;
+        }
         //项目信息
         private void AboutMe()
         {
@@ -473,45 +542,6 @@ $@"欢迎使用 {Define.NAME}！
                 );
             }
 
-        }
-
-        //写入
-        private void ImportFile(string filePath)
-        {
-            if (LockTextBox.Checked)
-                return;
-
-            if (!System.IO.File.Exists(filePath) || !LiteMode.Checked && ((Path.GetExtension(filePath) != ".txt" && Path.GetExtension(filePath) != ".vtxt")))
-            {
-                //非正常后缀提示
-                MessageBox.Show("请不要往我里面塞奇怪的东西...");
-            }
-
-            if (!LiteMode.Checked && TextBox.Text != "")
-            {
-                //便签有内容，提示用户是否覆盖
-                MessageBoxButtons msgButton = MessageBoxButtons.YesNo;
-
-                if (MessageBox.Show("呃...已经有东西了，确定要覆盖吗？", $"{Define.NAME} 的提醒", msgButton) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            FileStream importer = new FileStream(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
-            StreamReader reader = new StreamReader(importer);
-            TextBox.Text = reader.ReadToEnd();
-        }
-
-        //双缓冲加快启动速度
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x02000000; // 用双缓冲绘制窗口的所有子控件
-                return cp;
-            }
         }
     }
 }
