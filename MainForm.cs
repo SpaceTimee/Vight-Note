@@ -23,7 +23,7 @@ namespace Vight_Note
             public static readonly string VERSION = Application.ProductVersion;
             public const string DEVELOPER = "Space Time";
             public const string EMAIL = "Zeus6_6@163.com";
-            public const string RELEASEURL = "https://spacetime.lanzous.com/b01666yti";
+            public const string RELEASEURL = "https://spacetime.lanzoui.com/b01666yti";
             public const string POLICYURL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
             public const string RELEASEPASSWORD = "3a57";
 
