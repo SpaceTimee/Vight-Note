@@ -16,6 +16,10 @@
 1. Github(推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
 2. 蓝奏云(密码3a57)(速度快): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
 
+## 用户协议
+1. [隐私政策](https://thoughts.teambition.com/share/609fd36543b2b70046b09b06#title=Vight_Note_隐私政策)
+2. [使用协议]() (修改中...)
+
 ## 开发者:
 **Space Time**
 
