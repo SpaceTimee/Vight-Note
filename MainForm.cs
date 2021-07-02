@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.IO;
@@ -88,7 +82,6 @@ emmmm...
             config.AppSettings.Settings.Remove("IsFirstRun");
             config.AppSettings.Settings.Add("IsFirstRun", "false");
             config.Save();
-
         }
         private void CheckOpacity()
         {
@@ -124,28 +117,20 @@ emmmm...
             {
                 //上次退出前未开启轻模式
                 LiteMode.Checked = false;
-
-                Create.Text = "创建窗口 (Ctrl+N)";
-                //Close.Text不变
-                Save.Text = "保存文件 (Ctrl+S)";
-                Import.Text = "导入文件 (Ctrl+O)";
+                LiteShortcut(false);
             }
             else if (ConfigurationManager.AppSettings["IsLiteMode"].ToLower() == "true")
             {
                 //上次退出前开启了轻模式
                 LiteMode.Checked = true;
-
-                Create.Text = "创建窗口 (N)";
-                //Close.Text不变
-                Save.Text = "保存文件 (S)";
-                Import.Text = "导入文件 (O)";
+                LiteShortcut(true);
             }
         }
 
         private void Create_Click(object sender, EventArgs e)
         {
-            if (File.Exists(Define.EXENAME))
-                Process.Start(Define.EXENAME);
+            if (File.Exists(Application.ExecutablePath))
+                Process.Start(Application.ExecutablePath);
             else
                 MessageBox.Show("创建失败，可能是文件路径损坏导致的，重新安装可能可以解决哦");
         }
@@ -337,13 +322,7 @@ emmmm...
                 config.Save();
 
                 LiteMode.Checked = !LiteMode.Checked;
-                Create.Text = "创建窗口 (N)";
-                //Close.Text不变
-                Save.Text = "保存文件 (S)";
-                Export.Text = "导出文件 (S)";
-                Import.Text = "导入文件 (O)";
-                ImproveOpacity.Text = "透明度+ (I)";
-                ReduceOpacity.Text = "透明度- (D)";
+                LiteShortcut(true);
             }
             else
             {
@@ -354,13 +333,7 @@ emmmm...
                 config.Save();
 
                 LiteMode.Checked = !LiteMode.Checked;
-                Create.Text = "创建窗口 (Ctrl+N)";
-                //Close.Text不变
-                Save.Text = "保存文件 (Ctrl+S)";
-                Export.Text = "导出文件 (Alt+S)";
-                Import.Text = "导入文件 (Ctrl+O)";
-                ImproveOpacity.Text = "透明度+ (Ctrl+Alt+I)";
-                ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
+                LiteShortcut(false);
             }
         }
         private void Update_Click(object sender, EventArgs e)
@@ -381,7 +354,7 @@ emmmm...
         }
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，增加办公效率");
+            MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，提升办公效率，建议开启");
         }
         private void PrivacyPolicy_Click(object sender, EventArgs e)
         {
@@ -445,7 +418,7 @@ emmmm...
                 TextBox.ContextMenuStrip = TextBox.ContextMenuStrip == null ? TextMenu : null;  //切换右键(普通)/(功能)菜单
             else if (e.Control && e.KeyCode == Keys.N)
                 Create_Click(Create, new EventArgs());  //创建窗口
-            else if (e.KeyCode == Keys.Escape)
+            else if (e.Control && e.KeyCode == Keys.W)
                 Close_Click(Close, new EventArgs());    //关闭窗口
             else if (e.Control && e.KeyCode == Keys.S)
                 Save_Click(Save, new EventArgs());  //保存文件
@@ -453,10 +426,16 @@ emmmm...
                 Export_Click(Export, new EventArgs());  //导出文件(另存为)
             else if (e.Control && e.KeyCode == Keys.O)
                 Import_Click(Import, new EventArgs());  //导入文件
-            else if (e.Control && e.Alt && e.KeyCode == Keys.I)
+            else if (e.Control && e.Alt && e.KeyCode == Keys.U)
                 ImproveOpacity_Click(ImproveOpacity, new EventArgs());  //透明度+
             else if (e.Control && e.Alt && e.KeyCode == Keys.D)
                 ReduceOpacity_Click(ReduceOpacity, new EventArgs());    //透明度-
+            else if (e.Control && e.Alt && e.KeyCode == Keys.T)
+                AlwaysTop_Click(AlwaysTop, new EventArgs());    //置顶窗口
+            else if (e.Control && e.Alt && e.KeyCode == Keys.L)
+                LockTextBox_Click(LockTextBox, new EventArgs());    //锁定输入
+            else if (e.Control && e.Alt && e.KeyCode == Keys.B)
+                DarkMode_Click(DarkMode, new EventArgs());    //夜间模式
         }
         private void TextMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -465,14 +444,13 @@ emmmm...
 
             if (e.Control && e.KeyCode == Keys.N)
                 Create_Click(Create, new EventArgs());  //创建窗口
-            else if (e.KeyCode == Keys.Escape)
+            else if (e.Control && e.KeyCode == Keys.W)
                 Close_Click(Close, new EventArgs());    //关闭窗口
             else if (e.Control && e.KeyCode == Keys.S)
                 Save_Click(Save, new EventArgs());  //保存文件
             else if (e.Control && e.KeyCode == Keys.O)
                 Import_Click(Import, new EventArgs());  //导入文件
         }
-
         //文件未保存标记
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
@@ -482,7 +460,6 @@ emmmm...
                 Define.CHANGEMARK = true;
             }
         }
-
         //导入
         private void ImportFile()
         {
@@ -514,6 +491,36 @@ emmmm...
 
             this.Text = Path.GetFileName(Define.FILEPATH);
             Define.CHANGEMARK = false;
+        }
+        //轻模式热键显示
+        private void LiteShortcut(bool turnOn)
+        {
+            if (turnOn)
+            {
+                Create.Text = "创建窗口 (N)";
+                Close.Text = "关闭窗口 (W)";
+                Save.Text = "保存文件 (S)";
+                Export.Text = "导出文件 (S)";
+                Import.Text = "导入文件 (O)";
+                ImproveOpacity.Text = "透明度+ (U)";
+                ReduceOpacity.Text = "透明度- (D)";
+                AlwaysTop.Text = "置顶窗口 (T)";
+                LockTextBox.Text = "锁定输入 (L)";
+                DarkMode.Text = "夜间模式 (B)";
+            }
+            else
+            {
+                Create.Text = "创建窗口 (Ctrl+N)";
+                Close.Text = "关闭窗口 (Ctrl+W)";
+                Save.Text = "保存文件 (Ctrl+S)";
+                Export.Text = "导出文件 (Alt+S)";
+                Import.Text = "导入文件 (Ctrl+O)";
+                ImproveOpacity.Text = "透明度+ (Ctrl+Alt+U)";
+                ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
+                AlwaysTop.Text = "置顶窗口 (Ctrl+Alt+T)";
+                LockTextBox.Text = "锁定输入 (Ctrl+Alt+L)";
+                DarkMode.Text = "夜间模式 (Ctrl+Alt+B)";
+            }
         }
         //项目信息
         private void AboutMe()
