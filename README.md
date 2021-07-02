@@ -19,8 +19,8 @@
 2. [使用协议]() (维护中...)
 
 ## 下载方式:
-1. Github(推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
-2. 蓝奏云(密码3a57)(速度快): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
+1. Github (推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
+2. 蓝奏云 (密码3a57) (速度快): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
 
 ## 使用场景举例:
 1. 查看剪切板中文本的显示效果
