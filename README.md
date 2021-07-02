@@ -5,6 +5,9 @@
 ## 定位:
 一个轻量级的临时文本处理工具
 
+## 食用小贴士:
+[Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-%E9%A3%9F%E7%94%A8%E5%B0%8F%E8%B4%B4%E5%A3%AB)
+
 ## 部分使用场景举例:
 1. 查看剪切板中文本的显示效果
 2. 快速对文本进行一些简单处理
@@ -18,9 +21,12 @@
 
 ## 用户协议:
 1. [隐私政策](https://thoughts.teambition.com/share/609fd36543b2b70046b09b06#title=Vight_Note_隐私政策)
-2. [使用协议]() (修改中...)
+2. [使用协议]() (维护中...)
 
 ## 开发者:
 **Space Time**
+
+## 联系邮箱:
+**Zeus6_6@163.com**
 
 •ᴗ•
