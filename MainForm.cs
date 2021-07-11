@@ -136,7 +136,9 @@ emmmm...
         }
         private void Close_Click(object sender, EventArgs e)
         {
-            this.Close();
+            System.Environment.Exit(0);
+
+            //this.Close(); //旧版解决方案: 只关窗口(会出现杀不干净的情况)
         }
         private void Save_Click(object sender, EventArgs e)
         {
