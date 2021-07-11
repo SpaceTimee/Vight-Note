@@ -16,7 +16,7 @@
 
 ## 用户协议:
 1. [隐私政策](https://thoughts.teambition.com/share/609fd36543b2b70046b09b06#title=Vight_Note_隐私政策)
-2. [使用协议]() (维护中...)
+2. [使用协议](https://thoughts.teambition.com/share/60e11bdcad3f6b0046b0c3b2#title=Vight_Note_使用协议)
 
 ## 下载方式:
 1. Github (推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
