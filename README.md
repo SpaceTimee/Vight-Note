@@ -21,6 +21,7 @@
 ## 下载方式:
 1. Github (推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
 2. 蓝奏云 (密码3a57) (速度快): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
+3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/o9uRmei9QNP](https://www.aliyundrive.com/s/o9uRmei9QNP)
 
 ## 使用场景举例:
 1. 查看剪切板中文本的显示效果
