@@ -10,6 +10,7 @@
 ## 注意事项:
 1. Vight Note仍处于开发阶段，但每个正式版发布前会尽量确保其稳定可用
 2. 为避免不必要的麻烦，食用前请先阅读注意事项、食用小贴士和用户协议
+3. 所有功能全部集合在右键菜单(强调)
 
 ## 食用小贴士:
 [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-%E9%A3%9F%E7%94%A8%E5%B0%8F%E8%B4%B4%E5%A3%AB)
