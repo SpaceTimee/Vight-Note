@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-using System.Configuration;
-using System.IO;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Net.NetworkInformation;
+using System.Windows.Forms;
 
 namespace Vight_Note
 {
@@ -41,8 +40,8 @@ namespace Vight_Note
         }
         private void MainFormInit()
         {
-            //判断IsFirstRun的值(位于App.config中)
-            if (ConfigurationManager.AppSettings["IsFirstRun"].ToLower() == "true")
+            //判断IsFirstRun的值
+            if (Properties.Settings.Default.IsFirstRun)
             {
                 //是第一次运行
                 Welcome();
@@ -78,20 +77,19 @@ emmmm...
             AboutMe();
 
             //将IsFirstRun置为false
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings.Remove("IsFirstRun");
-            config.AppSettings.Settings.Add("IsFirstRun", "false");
-            config.Save();
+            Properties.Settings.Default.IsFirstRun = false;
+            Properties.Settings.Default.Save();
         }
         private void CheckOpacity()
         {
             //设定Opacity的值
-            this.Opacity = Convert.ToDouble(ConfigurationManager.AppSettings["Opacity"]);
+            Opacity = Properties.Settings.Default.Opacity;
+            Properties.Settings.Default.Save();
         }
         private void CheckDarkMode()
         {
             //判断IsDarkMode的值(位于App.config中)
-            if (ConfigurationManager.AppSettings["IsDarkMode"].ToLower() == "false")
+            if (!Properties.Settings.Default.IsDarkMode)
             {
                 //上次退出前未开启暗色模式
                 DarkMode.Checked = false;
@@ -100,7 +98,7 @@ emmmm...
                 TextBox.ForeColor = Color.Black;
                 TextMenu.BackColor = Color.White;
             }
-            else if (ConfigurationManager.AppSettings["IsDarkMode"].ToLower() == "true")
+            else
             {
                 //上次退出前开启了暗色模式
                 DarkMode.Checked = true;
@@ -113,13 +111,13 @@ emmmm...
         private void CheckLiteMode()
         {
             //判断IsLiteMode的值(位于App.config中)
-            if (ConfigurationManager.AppSettings["IsLiteMode"].ToLower() == "false")
+            if (!Properties.Settings.Default.IsLiteMode)
             {
                 //上次退出前未开启轻模式
                 LiteMode.Checked = false;
                 LiteShortcut(false);
             }
-            else if (ConfigurationManager.AppSettings["IsLiteMode"].ToLower() == "true")
+            else
             {
                 //上次退出前开启了轻模式
                 LiteMode.Checked = true;
@@ -178,7 +176,7 @@ emmmm...
             writer.Close();
             saver.Close();
 
-            this.Text = Path.GetFileName(Define.FILEPATH);
+            Text = Path.GetFileName(Define.FILEPATH);
             Define.CHANGEMARK = false;
         }
         private void Export_Click(object sender, EventArgs e)
@@ -213,29 +211,25 @@ emmmm...
         }
         private void ImproveOpacity_Click(object sender, EventArgs e)
         {
-            if (this.Opacity >= 0.2)
+            if (Opacity >= 0.2)
             {
-                this.Opacity -= 0.05;
+                Opacity -= 0.05;
 
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("Opacity");
-                config.AppSettings.Settings.Add("Opacity", Convert.ToString(this.Opacity));
-                config.Save();
+                Properties.Settings.Default.Opacity = Opacity;
+                Properties.Settings.Default.Save();
             }
         }
         private void ReduceOpacity_Click(object sender, EventArgs e)
         {
-            this.Opacity += 0.05;
+            Opacity += 0.05;
 
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings.Remove("Opacity");
-            config.AppSettings.Settings.Add("Opacity", Convert.ToString(this.Opacity));
-            config.Save();
+            Properties.Settings.Default.Opacity = Opacity;
+            Properties.Settings.Default.Save();
         }
         private void AlwaysTop_Click(object sender, EventArgs e)
         {
             AlwaysTop.Checked = !AlwaysTop.Checked;
-            this.TopMost = !this.TopMost;
+            TopMost = !TopMost;
         }
         private void LockTextBox_Click(object sender, EventArgs e)
         {
@@ -259,10 +253,8 @@ emmmm...
             if (!DarkMode.Checked)
             {
                 //开启暗色
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("IsDarkMode");
-                config.AppSettings.Settings.Add("IsDarkMode", "true");
-                config.Save();
+                Properties.Settings.Default.IsDarkMode = true;
+                Properties.Settings.Default.Save();
 
                 DarkMode.Checked = !DarkMode.Checked;
                 TextBox.BackColor = Color.Black;
@@ -272,10 +264,8 @@ emmmm...
             else
             {
                 //关闭暗色
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("IsDarkMode");
-                config.AppSettings.Settings.Add("IsDarkMode", "false");
-                config.Save();
+                Properties.Settings.Default.IsDarkMode = false;
+                Properties.Settings.Default.Save();
 
                 DarkMode.Checked = !DarkMode.Checked;
                 TextBox.BackColor = Color.White;
@@ -300,17 +290,17 @@ emmmm...
         }
         private void OpenBorder_Click(object sender, EventArgs e)
         {
-            if (this.FormBorderStyle == FormBorderStyle.Sizable)
+            if (FormBorderStyle == FormBorderStyle.Sizable)
             {
                 //隐藏边框
                 OpenBorder.Text = "显示边框";
-                this.FormBorderStyle = FormBorderStyle.None;
+                FormBorderStyle = FormBorderStyle.None;
             }
             else
             {
                 //显示边框
                 OpenBorder.Text = "隐藏边框";
-                this.FormBorderStyle = FormBorderStyle.Sizable;
+                FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
         private void LiteMode_Click(object sender, EventArgs e)
@@ -318,10 +308,8 @@ emmmm...
             if (!LiteMode.Checked)
             {
                 //开启轻模式
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("IsLiteMode");
-                config.AppSettings.Settings.Add("IsLiteMode", "true");
-                config.Save();
+                Properties.Settings.Default.IsLiteMode = true;
+                Properties.Settings.Default.Save();
 
                 LiteMode.Checked = !LiteMode.Checked;
                 LiteShortcut(true);
@@ -329,10 +317,8 @@ emmmm...
             else
             {
                 //关闭轻模式
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                config.AppSettings.Settings.Remove("IsLiteMode");
-                config.AppSettings.Settings.Add("IsLiteMode", "false");
-                config.Save();
+                Properties.Settings.Default.IsLiteMode = false;
+                Properties.Settings.Default.Save();
 
                 LiteMode.Checked = !LiteMode.Checked;
                 LiteShortcut(false);
@@ -449,16 +435,22 @@ emmmm...
             else if (e.Control && e.KeyCode == Keys.W)
                 Close_Click(Close, new EventArgs());    //关闭窗口
             else if (e.Control && e.KeyCode == Keys.S)
+            {
+                TextMenu.Close();
                 Save_Click(Save, new EventArgs());  //保存文件
+            }
             else if (e.Control && e.KeyCode == Keys.O)
+            {
+                TextMenu.Close();
                 Import_Click(Import, new EventArgs());  //导入文件
+            }
         }
         //文件未保存标记
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             if (!Define.CHANGEMARK)
             {
-                this.Text += "*";
+                Text += "*";
                 Define.CHANGEMARK = true;
             }
         }
@@ -491,7 +483,7 @@ emmmm...
             StreamReader reader = new StreamReader(importer);
             TextBox.Text = reader.ReadToEnd();
 
-            this.Text = Path.GetFileName(Define.FILEPATH);
+            Text = Path.GetFileName(Define.FILEPATH);
             Define.CHANGEMARK = false;
         }
         //轻模式热键显示

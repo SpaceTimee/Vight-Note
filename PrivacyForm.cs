@@ -8,8 +8,8 @@ namespace Vight_Note
         {
             InitializeComponent();
 
-            this.PrivacyBox.Text = Properties.Resources.Vight_Note_Privacy_Policy;
-            this.PrivacyBox.Select(0, 0);
+            PrivacyBox.Text = Properties.Resources.Vight_Note_Privacy_Policy;
+            PrivacyBox.Select(0, 0);
         }
 
         //热键
@@ -18,7 +18,7 @@ namespace Vight_Note
             if (e.KeyCode == Keys.Escape)
             {
                 //关闭窗口
-                this.Close();
+                Close();
             }
         }
     }
