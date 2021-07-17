@@ -38,7 +38,7 @@ namespace Vight_Note
             this.PrivacyBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.PrivacyBox.Cursor = System.Windows.Forms.Cursors.Default;
             this.PrivacyBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PrivacyBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.PrivacyBox.Font = new System.Drawing.Font("微软雅黑 Light", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.PrivacyBox.ForeColor = System.Drawing.Color.Black;
             this.PrivacyBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PrivacyBox.Location = new System.Drawing.Point(0, 0);
@@ -48,8 +48,9 @@ namespace Vight_Note
             this.PrivacyBox.Name = "PrivacyBox";
             this.PrivacyBox.ReadOnly = true;
             this.PrivacyBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.PrivacyBox.Size = new System.Drawing.Size(1174, 829);
+            this.PrivacyBox.Size = new System.Drawing.Size(404, 438);
             this.PrivacyBox.TabIndex = 0;
+            this.PrivacyBox.TabStop = false;
             this.PrivacyBox.Text = "[Error: 隐私政策加载错误]\r\n\r\n解决方案: 请访问在线文档\r\n错误反馈: Zeus6_6@163.com";
             this.PrivacyBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PrivacyBox_KeyDown);
             // 
@@ -57,17 +58,18 @@ namespace Vight_Note
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(192F, 192F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1174, 829);
+            this.ClientSize = new System.Drawing.Size(404, 438);
             this.Controls.Add(this.PrivacyBox);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(300, 71);
+            this.MinimumSize = new System.Drawing.Size(92, 71);
             this.Name = "PrivacyForm";
             this.Opacity = 0.9D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "隐私政策";
             this.ResumeLayout(false);
             this.PerformLayout();
 

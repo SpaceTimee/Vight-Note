@@ -67,6 +67,8 @@ namespace Vight_Note
             this.TextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.TextBox.ForeColor = System.Drawing.Color.Black;
+            this.TextBox.HideSelection = false;
+            this.TextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.TextBox.Location = new System.Drawing.Point(0, 0);
             this.TextBox.Margin = new System.Windows.Forms.Padding(0);
             this.TextBox.MaxLength = 2147483647;
@@ -74,7 +76,6 @@ namespace Vight_Note
             this.TextBox.Name = "TextBox";
             this.TextBox.Size = new System.Drawing.Size(404, 438);
             this.TextBox.TabIndex = 0;
-            this.TextBox.TabStop = false;
             this.TextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             this.TextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
             this.TextBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
@@ -106,23 +107,25 @@ namespace Vight_Note
             this.TextMenu.Name = "TextMenu";
             this.TextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.TextMenu.ShowCheckMargin = true;
-            this.TextMenu.Size = new System.Drawing.Size(369, 588);
+            this.TextMenu.Size = new System.Drawing.Size(376, 632);
             this.TextMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TextMenu_PreviewKeyDown);
             // 
             // Create
             // 
             this.Create.Image = global::Vight_Note.Properties.Resources.Create;
             this.Create.Name = "Create";
-            this.Create.Size = new System.Drawing.Size(368, 40);
-            this.Create.Text = "创建窗口 (Ctrl+N)";
+            this.Create.ShortcutKeyDisplayString = "(Ctrl+N)";
+            this.Create.Size = new System.Drawing.Size(375, 40);
+            this.Create.Text = "创建窗口";
             this.Create.Click += new System.EventHandler(this.Create_Click);
             // 
             // Close
             // 
             this.Close.Image = global::Vight_Note.Properties.Resources.Close;
             this.Close.Name = "Close";
-            this.Close.Size = new System.Drawing.Size(368, 40);
-            this.Close.Text = "关闭窗口 (Ctrl+W)";
+            this.Close.ShortcutKeyDisplayString = "(Ctrl+W)";
+            this.Close.Size = new System.Drawing.Size(375, 40);
+            this.Close.Text = "关闭窗口";
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
             // toolStripSeparator1
@@ -134,24 +137,27 @@ namespace Vight_Note
             // 
             this.Save.Image = global::Vight_Note.Properties.Resources.Save;
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(368, 40);
-            this.Save.Text = "保存文件 (Ctrl+S)";
+            this.Save.ShortcutKeyDisplayString = "(Ctrl+S)";
+            this.Save.Size = new System.Drawing.Size(375, 40);
+            this.Save.Text = "保存文件";
             this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Export
             // 
             this.Export.Image = global::Vight_Note.Properties.Resources.Export;
             this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(368, 40);
-            this.Export.Text = "导出文件 (Alt+S)";
+            this.Export.ShortcutKeyDisplayString = "(Alt+S)";
+            this.Export.Size = new System.Drawing.Size(375, 40);
+            this.Export.Text = "导出文件";
             this.Export.Click += new System.EventHandler(this.Export_Click);
             // 
             // Import
             // 
             this.Import.Image = global::Vight_Note.Properties.Resources.Import;
             this.Import.Name = "Import";
-            this.Import.Size = new System.Drawing.Size(368, 40);
-            this.Import.Text = "导入文件 (Ctrl+O)";
+            this.Import.ShortcutKeyDisplayString = "(Ctrl+O)";
+            this.Import.Size = new System.Drawing.Size(375, 40);
+            this.Import.Text = "导入文件";
             this.Import.Click += new System.EventHandler(this.Import_Click);
             // 
             // toolStripSeparator2
@@ -163,16 +169,18 @@ namespace Vight_Note
             // 
             this.ImproveOpacity.Image = global::Vight_Note.Properties.Resources.Improve;
             this.ImproveOpacity.Name = "ImproveOpacity";
-            this.ImproveOpacity.Size = new System.Drawing.Size(368, 40);
-            this.ImproveOpacity.Text = "透明度+ (Ctrl+Alt+U)";
+            this.ImproveOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+U)";
+            this.ImproveOpacity.Size = new System.Drawing.Size(375, 40);
+            this.ImproveOpacity.Text = "透明度+";
             this.ImproveOpacity.Click += new System.EventHandler(this.ImproveOpacity_Click);
             // 
             // ReduceOpacity
             // 
             this.ReduceOpacity.Image = global::Vight_Note.Properties.Resources.Reduce;
             this.ReduceOpacity.Name = "ReduceOpacity";
-            this.ReduceOpacity.Size = new System.Drawing.Size(368, 40);
-            this.ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
+            this.ReduceOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+D)";
+            this.ReduceOpacity.Size = new System.Drawing.Size(375, 40);
+            this.ReduceOpacity.Text = "透明度-";
             this.ReduceOpacity.Click += new System.EventHandler(this.ReduceOpacity_Click);
             // 
             // toolStripSeparator3
@@ -184,32 +192,35 @@ namespace Vight_Note
             // 
             this.AlwaysTop.Image = global::Vight_Note.Properties.Resources.Top;
             this.AlwaysTop.Name = "AlwaysTop";
-            this.AlwaysTop.Size = new System.Drawing.Size(368, 40);
-            this.AlwaysTop.Text = "置顶窗口 (Ctrl+Alt+T)";
+            this.AlwaysTop.ShortcutKeyDisplayString = "(Ctrl+Alt+T)";
+            this.AlwaysTop.Size = new System.Drawing.Size(375, 40);
+            this.AlwaysTop.Text = "置顶窗口";
             this.AlwaysTop.Click += new System.EventHandler(this.AlwaysTop_Click);
             // 
             // LockTextBox
             // 
             this.LockTextBox.Image = global::Vight_Note.Properties.Resources.Unlock;
             this.LockTextBox.Name = "LockTextBox";
-            this.LockTextBox.Size = new System.Drawing.Size(368, 40);
-            this.LockTextBox.Text = "锁定输入 (Ctrl+Alt+L)";
+            this.LockTextBox.ShortcutKeyDisplayString = "(Ctrl+Alt+L)";
+            this.LockTextBox.Size = new System.Drawing.Size(375, 40);
+            this.LockTextBox.Text = "锁定输入";
             this.LockTextBox.Click += new System.EventHandler(this.LockTextBox_Click);
             // 
             // DarkMode
             // 
             this.DarkMode.Image = global::Vight_Note.Properties.Resources.Dark;
             this.DarkMode.Name = "DarkMode";
-            this.DarkMode.Size = new System.Drawing.Size(368, 40);
-            this.DarkMode.Text = "夜间模式 (Ctrl+Alt+B)";
+            this.DarkMode.ShortcutKeyDisplayString = "(Ctrl+Alt+B)";
+            this.DarkMode.Size = new System.Drawing.Size(375, 40);
+            this.DarkMode.Text = "夜间模式";
             this.DarkMode.Click += new System.EventHandler(this.DarkMode_Click);
             // 
             // ScrollBar
             // 
             this.ScrollBar.Image = global::Vight_Note.Properties.Resources.Scroll;
             this.ScrollBar.Name = "ScrollBar";
-            this.ScrollBar.Size = new System.Drawing.Size(368, 40);
-            this.ScrollBar.Text = "显示滚动条";
+            this.ScrollBar.Size = new System.Drawing.Size(375, 40);
+            this.ScrollBar.Text = "显示滑块";
             this.ScrollBar.Click += new System.EventHandler(this.ScrollBar_Click);
             // 
             // OpenBorder
@@ -224,7 +235,7 @@ namespace Vight_Note
             // 
             this.LiteMode.Image = ((System.Drawing.Image)(resources.GetObject("LiteMode.Image")));
             this.LiteMode.Name = "LiteMode";
-            this.LiteMode.Size = new System.Drawing.Size(368, 40);
+            this.LiteMode.Size = new System.Drawing.Size(375, 40);
             this.LiteMode.Text = "轻模式";
             this.LiteMode.Click += new System.EventHandler(this.LiteMode_Click);
             // 

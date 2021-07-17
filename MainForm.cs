@@ -12,13 +12,11 @@ namespace Vight_Note
         public static class Define
         {
             public const string NAME = "Vight Note";
-            public const string EXENAME = "Vight Note.exe";
             public static readonly string VERSION = Application.ProductVersion;
             public const string DEVELOPER = "Space Time";
-            public const string EMAIL = "Zeus6_6@163.com";
-            public const string RELEASEURL = "https://spacetime.lanzoui.com/b01666yti";
-            public const string POLICYURL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
-            public const string RELEASEPASSWORD = "3a57";
+            public const string RELEASE_URL = "https://spacetime.lanzoui.com/b01666yti";
+            public const string POLICY_URL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
+            public const string RELEASE_PASSWORD = "3a57";
 
             public static bool CHANGEMARK = false;
             public static string FILEPATH = "";
@@ -59,8 +57,7 @@ namespace Vight_Note
             //显示欢迎界面
             MessageBox.Show
             (
-$@"在我的印象里，这似乎是你第一次使用我
-emmmm...
+$@"在我的印象里，这似乎是我第一次见到你
 很高兴认识你，我的主人(脸红)
 那个...我是{Define.NAME}
 这是{Define.DEVELOPER}给我起的名字
@@ -68,13 +65,11 @@ emmmm...
 偷偷告诉你哦
 我已经有很多好用的小功能了
 啊...现在是看不到的啦
-它们都藏在便签界面的右键菜单里
+它们都藏在便签的右键菜单里
 等会儿一定要去试试啊
 啊，似乎耽误你太多时间了
 准备好了就点确定吧"
             );
-
-            AboutMe();
 
             //将IsFirstRun置为false
             Properties.Settings.Default.IsFirstRun = false;
@@ -328,17 +323,22 @@ emmmm...
         {
             if (!LiteMode.Checked)
             {
-                MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASEPASSWORD}");
+                MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_PASSWORD}");
             }
             else
             {
-                MessageBox.Show($"密码：{Define.RELEASEPASSWORD}");
+                MessageBox.Show($"密码：{Define.RELEASE_PASSWORD}");
             }
-            Process.Start(Define.RELEASEURL);
+            Process.Start(Define.RELEASE_URL);
         }
         private void About_Click(object sender, EventArgs e)
         {
             AboutMe();
+        }
+        private void AboutDeveloper_Click(object sender, EventArgs e)
+        {
+            AboutForm aboutDeveloperForm = new AboutForm();
+            aboutDeveloperForm.Show();
         }
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
         {
@@ -367,11 +367,11 @@ emmmm...
                     viewOnLine = true;
             }
             if (viewOnLine)
-                Process.Start(Define.POLICYURL);
+                Process.Start(Define.POLICY_URL);
             else
             {
                 PrivacyForm privacyForm = new PrivacyForm();
-                privacyForm.Show();
+                privacyForm.ShowDialog();
             }
         }
 
@@ -491,58 +491,36 @@ emmmm...
         {
             if (turnOn)
             {
-                Create.Text = "创建窗口 (N)";
-                Close.Text = "关闭窗口 (W)";
-                Save.Text = "保存文件 (S)";
-                Export.Text = "导出文件 (S)";
-                Import.Text = "导入文件 (O)";
-                ImproveOpacity.Text = "透明度+ (U)";
-                ReduceOpacity.Text = "透明度- (D)";
-                AlwaysTop.Text = "置顶窗口 (T)";
-                LockTextBox.Text = "锁定输入 (L)";
-                DarkMode.Text = "夜间模式 (B)";
+                Create.ShortcutKeyDisplayString = "(N)";
+                Close.ShortcutKeyDisplayString = "(W)";
+                Save.ShortcutKeyDisplayString = "(S)";
+                Export.ShortcutKeyDisplayString = "(S)";
+                Import.ShortcutKeyDisplayString = "(O)";
+                ImproveOpacity.ShortcutKeyDisplayString = "(U)";
+                ReduceOpacity.ShortcutKeyDisplayString = "(D)";
+                AlwaysTop.ShortcutKeyDisplayString = "(T)";
+                LockTextBox.ShortcutKeyDisplayString = "(L)";
+                DarkMode.ShortcutKeyDisplayString = "(B)";
             }
             else
             {
-                Create.Text = "创建窗口 (Ctrl+N)";
-                Close.Text = "关闭窗口 (Ctrl+W)";
-                Save.Text = "保存文件 (Ctrl+S)";
-                Export.Text = "导出文件 (Alt+S)";
-                Import.Text = "导入文件 (Ctrl+O)";
-                ImproveOpacity.Text = "透明度+ (Ctrl+Alt+U)";
-                ReduceOpacity.Text = "透明度- (Ctrl+Alt+D)";
-                AlwaysTop.Text = "置顶窗口 (Ctrl+Alt+T)";
-                LockTextBox.Text = "锁定输入 (Ctrl+Alt+L)";
-                DarkMode.Text = "夜间模式 (Ctrl+Alt+B)";
+                Create.ShortcutKeyDisplayString = "(Ctrl+N)";
+                Close.ShortcutKeyDisplayString = "(Ctrl+W)";
+                Save.ShortcutKeyDisplayString = "(Ctrl+S)";
+                Export.ShortcutKeyDisplayString = "(Alt+S)";
+                Import.ShortcutKeyDisplayString = "(Ctrl+O)";
+                ImproveOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+U)";
+                ReduceOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+D)";
+                AlwaysTop.ShortcutKeyDisplayString = "(Ctrl+Alt+T)";
+                LockTextBox.ShortcutKeyDisplayString = "(Ctrl+Alt+L)";
+                DarkMode.ShortcutKeyDisplayString = "(Ctrl+Alt+B)";
             }
         }
         //项目信息
         private void AboutMe()
         {
-            if (!LiteMode.Checked)
-            {
-                MessageBox.Show
-                (
-$@"欢迎使用 {Define.NAME}！
-
-开发者：{Define.DEVELOPER}
-联系邮箱：{Define.EMAIL}
-版本号：{Define.VERSION}
-tip：如果感觉弹窗过多建议开启轻模式"
-                );
-            }
-            else
-            {
-                MessageBox.Show
-                (
-$@"欢迎使用 {Define.NAME}！
-
-开发者：{Define.DEVELOPER}
-联系邮箱：{Define.EMAIL}
-版本号：{Define.VERSION}"
-                );
-            }
-
+            AboutForm aboutForm = new AboutForm();
+            aboutForm.ShowDialog();
         }
     }
 }
