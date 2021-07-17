@@ -19,10 +19,14 @@
 1. [隐私政策](https://thoughts.teambition.com/share/609fd36543b2b70046b09b06#title=Vight_Note_隐私政策)
 2. [使用协议](https://thoughts.teambition.com/share/60e11bdcad3f6b0046b0c3b2#title=Vight_Note_使用协议)
 
-## 下载方式:
-1. Github (推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
+## 下载地址:
+1. Github (强烈推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
 2. 蓝奏云 (密码3a57) (大陆推荐): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
 3. 阿里云盘 (不支持appx) (不推荐): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
+
+## 安装方式:
+1. APPX安装包 (强烈推荐): 下载Vight Note Package.zip并解压->双击打开Vight Note Package.cer证书文件->点击安装证书->选择本地计算机->点击下一步并赋予管理员权限->选择将所有的证书都放入下列存储->点击浏览->选择受信任的根证书颁发机构->点击确定->点击下一页->点击完成->双击打开Vight Note Package.appx->点击Install即可安装
+2. EXE安装包 (不推荐): 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
 
 ## 使用场景举例:
 1. 查看剪切板中文本的显示效果
