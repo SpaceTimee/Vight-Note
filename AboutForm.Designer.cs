@@ -105,7 +105,7 @@ namespace Vight_Note
             this.OpenSourceLinkLabel.TabStop = true;
             this.OpenSourceLinkLabel.Text = "-> 开源地址";
             this.OpenSourceLinkLabel.UseCompatibleTextRendering = true;
-            this.OpenSourceLinkLabel.VisitedLinkColor = System.Drawing.Color.DarkViolet;
+            this.OpenSourceLinkLabel.VisitedLinkColor = System.Drawing.Color.Blue;
             this.OpenSourceLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.OpenSourceLinkLabel_LinkClicked);
             // 
             // VersionLabel
@@ -161,6 +161,7 @@ namespace Vight_Note
             this.Controls.Add(this.MainPageLinkLabel);
             this.Controls.Add(this.DeveloperLabel);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.Color.Black;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(92, 71);

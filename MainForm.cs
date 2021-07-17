@@ -83,19 +83,8 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void CheckDarkMode()
         {
-            //判断IsDarkMode的值(位于App.config中)
-            if (!Properties.Settings.Default.IsDarkMode)
+            if (Properties.Settings.Default.IsDarkMode)
             {
-                //上次退出前未开启暗色模式
-                DarkMode.Checked = false;
-
-                TextBox.BackColor = Color.White;
-                TextBox.ForeColor = Color.Black;
-                TextMenu.BackColor = Color.White;
-            }
-            else
-            {
-                //上次退出前开启了暗色模式
                 DarkMode.Checked = true;
 
                 TextBox.BackColor = Color.Black;
@@ -105,16 +94,8 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void CheckLiteMode()
         {
-            //判断IsLiteMode的值(位于App.config中)
-            if (!Properties.Settings.Default.IsLiteMode)
+            if (Properties.Settings.Default.IsLiteMode)
             {
-                //上次退出前未开启轻模式
-                LiteMode.Checked = false;
-                LiteShortcut(false);
-            }
-            else
-            {
-                //上次退出前开启了轻模式
                 LiteMode.Checked = true;
                 LiteShortcut(true);
             }
@@ -337,8 +318,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void AboutDeveloper_Click(object sender, EventArgs e)
         {
-            AboutForm aboutDeveloperForm = new AboutForm();
-            aboutDeveloperForm.Show();
+            AboutMe();
         }
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
         {
@@ -370,7 +350,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Process.Start(Define.POLICY_URL);
             else
             {
-                PrivacyForm privacyForm = new PrivacyForm();
+                PrivacyForm privacyForm = new PrivacyForm(DarkMode.Checked);
                 privacyForm.ShowDialog();
             }
         }
@@ -379,13 +359,9 @@ $@"在我的印象里，这似乎是我第一次见到你
         private void TextBox_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
                 e.Effect = DragDropEffects.Move;
-            }
             else
-            {
                 e.Effect = DragDropEffects.None;
-            }
         }
         private void TextBox_DragDrop(object sender, DragEventArgs e)
         {
@@ -519,7 +495,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         //项目信息
         private void AboutMe()
         {
-            AboutForm aboutForm = new AboutForm();
+            AboutForm aboutForm = new AboutForm(DarkMode.Checked);
             aboutForm.ShowDialog();
         }
     }

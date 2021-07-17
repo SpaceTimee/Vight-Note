@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Vight_Note
@@ -12,12 +13,29 @@ namespace Vight_Note
             public const string EMAIL = "Zeus6_6@163.com";
         }
 
-        public AboutForm()
+        public AboutForm(bool isDarkMode)
         {
             InitializeComponent();
 
+            //设定暗色模式
+            CheckDarkMode(isDarkMode);
+
             //显示版本号
             VersionLabel.Text = "版本号: " + Application.ProductVersion;
+        }
+        private void CheckDarkMode(bool isDarkMode)
+        {
+            if (isDarkMode)
+            {
+                BackColor = Color.Black;
+                ForeColor = Color.Gray;
+                MainPageLinkLabel.LinkColor = Color.Red;
+                MainPageLinkLabel.ActiveLinkColor = Color.Blue;
+                OpenSourceLinkLabel.LinkColor = Color.Red;
+                OpenSourceLinkLabel.ActiveLinkColor = Color.Blue;
+                EmailLinkLabel.LinkColor = Color.Red;
+                EmailLinkLabel.ActiveLinkColor = Color.Blue;
+            }
         }
 
         private void MainPageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
