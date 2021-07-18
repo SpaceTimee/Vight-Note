@@ -25,7 +25,7 @@
 3. 阿里云盘 (不支持appx) (不推荐): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
 
 ## 安装方式:
-1. APPX安装包 (强烈推荐): 下载Vight Note Package.zip并解压->双击打开Vight Note Package.cer证书文件->点击安装证书->选择本地计算机->点击下一步并赋予管理员权限->选择将所有的证书都放入下列存储->点击浏览->选择受信任的根证书颁发机构->点击确定->点击下一页->点击完成->双击打开Vight Note Package.appx->点击Install即可安装
+1. APPX安装包 (强烈推荐): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
 2. EXE安装包 (不推荐): 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
 
 ## 使用场景举例:
