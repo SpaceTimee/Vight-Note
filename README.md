@@ -22,7 +22,7 @@
 ## 下载地址:
 1. Github (强烈推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
 2. 蓝奏云 (密码3a57) (大陆推荐): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
-3. 阿里云盘 (不支持appx) (不推荐): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
+3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
 
 ## 安装方式:
 1. APPX安装包 (强烈推荐): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
