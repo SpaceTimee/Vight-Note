@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Vight_Note
@@ -11,15 +12,15 @@ namespace Vight_Note
     {
         public static class Define
         {
-            public const string NAME = "Vight Note";
+            public const string NAME = @"Vight Note";
             public static readonly string VERSION = Application.ProductVersion;
-            public const string DEVELOPER = "Space Time";
-            public const string RELEASE_URL = "https://spacetime.lanzoui.com/b01666yti";
-            public const string POLICY_URL = "https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
-            public const string RELEASE_PASSWORD = "3a57";
+            public const string DEVELOPER = @"Space Time";
+
+            public const string POLICY_URL = @"https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
+            public const string THOUGHT_PING_URL = @"thoughts.teambition.com";
 
             public static bool CHANGEMARK = false;
-            public static string FILEPATH = "";
+            public static string FILEPATH = @"";
         }
 
         public MainForm(string[] args)
@@ -302,15 +303,8 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Update_Click(object sender, EventArgs e)
         {
-            if (!LiteMode.Checked)
-            {
-                MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_PASSWORD}");
-            }
-            else
-            {
-                MessageBox.Show($"密码：{Define.RELEASE_PASSWORD}");
-            }
-            Process.Start(Define.RELEASE_URL);
+            UpdateForm updateForm = new UpdateForm(LiteMode.Checked);
+            updateForm.ShowDialog();
         }
         private void About_Click(object sender, EventArgs e)
         {
@@ -324,30 +318,22 @@ $@"在我的印象里，这似乎是我第一次见到你
         {
             MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，提升办公效率，建议开启");
         }
-        private void PrivacyPolicy_Click(object sender, EventArgs e)
+        private async void PrivacyPolicy_Click(object sender, EventArgs e)
         {
-            bool viewOnLine = false;
-            Ping ping = new Ping();
-            try
+            bool viewOnline = await CheckConnect();
+
+            if (!LiteMode.Checked)
             {
-                PingReply reply = ping.Send("thoughts.teambition.com"); //判断是否能连接到thought
-                if (reply.Status == IPStatus.Success)   //连接成功
-                {
-                    viewOnLine = true;
-                    if (!LiteMode.Checked && MessageBox.Show("是否选择在线文档(推荐)", "已连接网络", MessageBoxButtons.YesNo) == DialogResult.No)
-                        viewOnLine = false;
-                }
-                else
-                    throw new Exception("NetworkError");
+                if (viewOnline && MessageBox.Show("是否选择在线文档(推荐)", "已成功连接服务器", MessageBoxButtons.YesNo) == DialogResult.No)
+                    viewOnline = false;
+                else if (!viewOnline && MessageBox.Show("是否选择本地文档", "连接服务器失败", MessageBoxButtons.YesNo) == DialogResult.No)
+                    viewOnline = true;
             }
-            catch   //连接失败
+
+            if (viewOnline)
             {
-                viewOnLine = false;
-                if (!LiteMode.Checked && MessageBox.Show("是否选择本地文档", "未连接网络", MessageBoxButtons.YesNo) == DialogResult.No)
-                    viewOnLine = true;
-            }
-            if (viewOnLine)
                 Process.Start(Define.POLICY_URL);
+            }
             else
             {
                 PrivacyForm privacyForm = new PrivacyForm(DarkMode.Checked);
@@ -421,47 +407,6 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Import_Click(Import, new EventArgs());  //导入文件
             }
         }
-        //文件未保存标记
-        private void TextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (!Define.CHANGEMARK)
-            {
-                Text += "*";
-                Define.CHANGEMARK = true;
-            }
-        }
-        //导入
-        private void ImportFile()
-        {
-            //特殊情况采取的特殊行为
-            if (LockTextBox.Checked)
-                return;
-
-            if (!System.IO.File.Exists(Define.FILEPATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILEPATH) != ".txt" && Path.GetExtension(Define.FILEPATH) != ".vtxt")))
-            {
-                //非正常后缀提示
-                MessageBox.Show("请不要往我里面塞奇怪的东西...");
-            }
-
-            if (!LiteMode.Checked && TextBox.Text != "")
-            {
-                //便签有内容，提示用户是否覆盖
-                MessageBoxButtons msgButton = MessageBoxButtons.YesNo;
-
-                if (MessageBox.Show("呃...已经有东西了，确定要覆盖吗？", $"{Define.NAME} 的提醒", msgButton) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            //读文件
-            FileStream importer = new FileStream(Define.FILEPATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
-            StreamReader reader = new StreamReader(importer);
-            TextBox.Text = reader.ReadToEnd();
-
-            Text = Path.GetFileName(Define.FILEPATH);
-            Define.CHANGEMARK = false;
-        }
         //轻模式热键显示
         private void LiteShortcut(bool turnOn)
         {
@@ -490,6 +435,62 @@ $@"在我的印象里，这似乎是我第一次见到你
                 AlwaysTop.ShortcutKeyDisplayString = "(Ctrl+Alt+T)";
                 LockTextBox.ShortcutKeyDisplayString = "(Ctrl+Alt+L)";
                 DarkMode.ShortcutKeyDisplayString = "(Ctrl+Alt+B)";
+            }
+        }
+        //文件未保存标记
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!Define.CHANGEMARK)
+            {
+                Text += "*";
+                Define.CHANGEMARK = true;
+            }
+        }
+        //导入
+        private void ImportFile()
+        {
+            //特殊情况采取的特殊行为
+            if (LockTextBox.Checked)
+                return;
+
+            if (!System.IO.File.Exists(Define.FILEPATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILEPATH) != ".txt" && Path.GetExtension(Define.FILEPATH) != ".vtxt")))
+            {
+                //非正常后缀提示
+                MessageBox.Show("请不要往我里面塞奇怪的东西...");
+            }
+
+            if (!LiteMode.Checked && TextBox.Text != "")
+            {
+                //便签有内容，提示用户是否覆盖
+                MessageBoxButtons msgButton = MessageBoxButtons.YesNo;
+
+                if (MessageBox.Show("呃...已经有东西了，确定要覆盖吗？", $"{Define.NAME} 的提醒", msgButton) == DialogResult.No)
+                    return;
+            }
+
+            //读文件
+            FileStream importer = new FileStream(Define.FILEPATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            StreamReader reader = new StreamReader(importer);
+            TextBox.Text = reader.ReadToEnd();
+
+            Text = Path.GetFileName(Define.FILEPATH);
+            Define.CHANGEMARK = false;
+        }
+        //Ping检查连接
+        private async Task<bool> CheckConnect()
+        {
+            Ping ping = new Ping();
+            try
+            {
+                PingReply reply = await ping.SendPingAsync(Define.THOUGHT_PING_URL); //Ping Thought服务器
+                if (reply.Status == IPStatus.Success)   //连接成功
+                    return true;
+                else
+                    throw new Exception("NetworkError");
+            }
+            catch   //连接失败
+            {
+                return false;
             }
         }
         //项目信息

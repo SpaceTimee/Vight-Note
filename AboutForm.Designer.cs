@@ -44,7 +44,7 @@ namespace Vight_Note
             this.DeveloperLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DeveloperLabel.AutoSize = true;
             this.DeveloperLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.DeveloperLabel.Location = new System.Drawing.Point(31, 169);
+            this.DeveloperLabel.Location = new System.Drawing.Point(31, 167);
             this.DeveloperLabel.Margin = new System.Windows.Forms.Padding(0);
             this.DeveloperLabel.Name = "DeveloperLabel";
             this.DeveloperLabel.Size = new System.Drawing.Size(230, 31);
@@ -59,7 +59,7 @@ namespace Vight_Note
             this.MainPageLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(3, 4);
             this.MainPageLinkLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.MainPageLinkLabel.LinkColor = System.Drawing.Color.Blue;
-            this.MainPageLinkLabel.Location = new System.Drawing.Point(31, 231);
+            this.MainPageLinkLabel.Location = new System.Drawing.Point(31, 230);
             this.MainPageLinkLabel.Margin = new System.Windows.Forms.Padding(0);
             this.MainPageLinkLabel.Name = "MainPageLinkLabel";
             this.MainPageLinkLabel.Size = new System.Drawing.Size(144, 38);
@@ -78,7 +78,7 @@ namespace Vight_Note
             this.EmailLinkLabel.LinkArea = new System.Windows.Forms.LinkArea(3, 4);
             this.EmailLinkLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.EmailLinkLabel.LinkColor = System.Drawing.Color.Blue;
-            this.EmailLinkLabel.Location = new System.Drawing.Point(31, 369);
+            this.EmailLinkLabel.Location = new System.Drawing.Point(31, 370);
             this.EmailLinkLabel.Margin = new System.Windows.Forms.Padding(0);
             this.EmailLinkLabel.Name = "EmailLinkLabel";
             this.EmailLinkLabel.Size = new System.Drawing.Size(144, 38);
@@ -113,7 +113,7 @@ namespace Vight_Note
             this.VersionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.VersionLabel.AutoSize = true;
             this.VersionLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.VersionLabel.Location = new System.Drawing.Point(31, 107);
+            this.VersionLabel.Location = new System.Drawing.Point(31, 104);
             this.VersionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(147, 31);
@@ -127,7 +127,7 @@ namespace Vight_Note
             this.IdentityPicture.ErrorImage = null;
             this.IdentityPicture.Image = global::Vight_Note.Properties.Resources.IdentityImg;
             this.IdentityPicture.InitialImage = null;
-            this.IdentityPicture.Location = new System.Drawing.Point(193, 222);
+            this.IdentityPicture.Location = new System.Drawing.Point(193, 223);
             this.IdentityPicture.Margin = new System.Windows.Forms.Padding(0);
             this.IdentityPicture.Name = "IdentityPicture";
             this.IdentityPicture.Size = new System.Drawing.Size(175, 175);
