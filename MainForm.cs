@@ -90,7 +90,7 @@ $@"在我的印象里，这似乎是我第一次见到你
 
                 TextBox.BackColor = Color.Black;
                 TextBox.ForeColor = Color.Gray;
-                TextMenu.BackColor = Color.Gray;
+                FunctionMenu.BackColor = Color.Gray;
             }
         }
         private void CheckLiteMode()
@@ -236,7 +236,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 DarkMode.Checked = !DarkMode.Checked;
                 TextBox.BackColor = Color.Black;
                 TextBox.ForeColor = Color.Gray;
-                TextMenu.BackColor = Color.Gray;
+                FunctionMenu.BackColor = Color.Gray;
             }
             else
             {
@@ -247,7 +247,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 DarkMode.Checked = !DarkMode.Checked;
                 TextBox.BackColor = Color.White;
                 TextBox.ForeColor = Color.Black;
-                TextMenu.BackColor = Color.White;
+                FunctionMenu.BackColor = Color.White;
             }
         }
         private void ScrollBar_Click(object sender, EventArgs e)
@@ -255,13 +255,13 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (TextBox.ScrollBars == ScrollBars.None)
             {
                 //显示滚动条
-                ScrollBar.Text = "隐藏滚动条";
+                ScrollBar.Text = "隐藏滑块";
                 TextBox.ScrollBars = ScrollBars.Vertical;
             }
             else
             {
                 //隐藏滚动条
-                ScrollBar.Text = "显示滚动条";
+                ScrollBar.Text = "显示滑块";
                 TextBox.ScrollBars = ScrollBars.None;
             }
         }
@@ -303,14 +303,10 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Update_Click(object sender, EventArgs e)
         {
-            UpdateForm updateForm = new UpdateForm(LiteMode.Checked);
+            UpdateForm updateForm = new UpdateForm(DarkMode.Checked, LiteMode.Checked);
             updateForm.ShowDialog();
         }
         private void About_Click(object sender, EventArgs e)
-        {
-            AboutMe();
-        }
-        private void AboutDeveloper_Click(object sender, EventArgs e)
         {
             AboutMe();
         }
@@ -320,6 +316,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private async void PrivacyPolicy_Click(object sender, EventArgs e)
         {
+            //检查与Thought服务器的连接
             bool viewOnline = await CheckConnect();
 
             if (!LiteMode.Checked)
@@ -339,6 +336,20 @@ $@"在我的印象里，这似乎是我第一次见到你
                 PrivacyForm privacyForm = new PrivacyForm(DarkMode.Checked);
                 privacyForm.ShowDialog();
             }
+        }
+
+        private void FunctionMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (TextBox.SelectionLength > 0)
+            {
+                e.Cancel = true;
+                TextMenu.Show(MousePosition.X, MousePosition.Y);
+            }
+        }
+
+        private void Count_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("字数统计: " + Convert.ToString(TextBox.SelectionLength));
         }
 
         //拖放
@@ -365,7 +376,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 return;
 
             if (e.Control && e.Alt && e.KeyCode == Keys.E)
-                TextBox.ContextMenuStrip = TextBox.ContextMenuStrip == null ? TextMenu : null;  //切换右键(普通)/(功能)菜单
+                TextBox.ContextMenuStrip = TextBox.ContextMenuStrip == null ? FunctionMenu : null;  //切换右键(普通)/(功能)菜单
             else if (e.Control && e.KeyCode == Keys.N)
                 Create_Click(Create, new EventArgs());  //创建窗口
             else if (e.Control && e.KeyCode == Keys.W)
@@ -387,7 +398,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             else if (e.Control && e.Alt && e.KeyCode == Keys.B)
                 DarkMode_Click(DarkMode, new EventArgs());    //夜间模式
         }
-        private void TextMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void FunctionMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (LockTextBox.Checked)
                 return;
@@ -398,12 +409,12 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Close_Click(Close, new EventArgs());    //关闭窗口
             else if (e.Control && e.KeyCode == Keys.S)
             {
-                TextMenu.Close();
+                FunctionMenu.Close();
                 Save_Click(Save, new EventArgs());  //保存文件
             }
             else if (e.Control && e.KeyCode == Keys.O)
             {
-                TextMenu.Close();
+                FunctionMenu.Close();
                 Import_Click(Import, new EventArgs());  //导入文件
             }
         }

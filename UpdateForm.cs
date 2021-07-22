@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
@@ -32,15 +33,26 @@ namespace Vight_Note
             public static string RELEASE_JSON = @"";
         }
 
-        public UpdateForm(bool isLiteMode)
+        public UpdateForm(bool isDarkMode, bool isLiteMode)
         {
             InitializeComponent();
 
             //显示版本号
             LocalVersionLabel.Text = Application.ProductVersion;
 
+            //设定暗色模式
+            CheckDarkMode(isDarkMode);
+
             //记录轻模式
             Define.IS_LITEMODE = isLiteMode;
+        }
+        private void CheckDarkMode(bool isDarkMode)
+        {
+            if (isDarkMode)
+            {
+                BackColor = Color.Black;
+                ForeColor = Color.Gray;
+            }
         }
 
         private async void UpdateButton_Click(object sender, System.EventArgs e)
