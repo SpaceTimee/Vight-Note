@@ -25,9 +25,9 @@ namespace Vight_Note
             public const string RELEASE_LANZOU_URL = @"https://spacetime.lanzoui.com/b01666yti";
             public const string RELEASE_LANZOU_PASSWORD = @"3a57";
 
-            public static readonly string APPX_ZIP_PATH = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vight Note Package.zip";
-            public static readonly string APPX_PATH = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vight Note Package";
-            public static readonly string EXE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\Vight Note Setup.exe";
+            public static readonly string APPX_ZIP_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Vight Note Package.zip";
+            public static readonly string APPX_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Vight Note Package";
+            public static readonly string EXE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Vight Note Setup.exe";
 
             public static bool IS_LITEMODE = false;
             public static string RELEASE_JSON = @"";
@@ -143,9 +143,15 @@ namespace Vight_Note
         private void LanzouButton_Click(object sender, EventArgs e)
         {
             if (!Define.IS_LITEMODE)
-                MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_LANZOU_PASSWORD}");
+            {
+                if (MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_LANZOU_PASSWORD}", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    return;
+            }
             else
-                MessageBox.Show($"密码：{Define.RELEASE_LANZOU_PASSWORD}");
+            {
+                if (MessageBox.Show($"密码：{Define.RELEASE_LANZOU_PASSWORD}", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                    return;
+            }
 
             Process.Start(Define.RELEASE_LANZOU_URL);
 
