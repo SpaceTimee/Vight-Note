@@ -57,6 +57,7 @@ namespace Vight_Note
             this.About = new System.Windows.Forms.ToolStripMenuItem();
             this.TextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Count = new System.Windows.Forms.ToolStripMenuItem();
+            this.Run = new System.Windows.Forms.ToolStripMenuItem();
             this.FunctionMenu.SuspendLayout();
             this.TextMenu.SuspendLayout();
             this.SuspendLayout();
@@ -283,7 +284,7 @@ namespace Vight_Note
             this.WhatIsLiteMode.ForeColor = System.Drawing.Color.Black;
             this.WhatIsLiteMode.Image = global::Vight_Note.Properties.Resources.What;
             this.WhatIsLiteMode.Name = "WhatIsLiteMode";
-            this.WhatIsLiteMode.Size = new System.Drawing.Size(359, 44);
+            this.WhatIsLiteMode.Size = new System.Drawing.Size(291, 44);
             this.WhatIsLiteMode.Text = "什么是轻模式";
             this.WhatIsLiteMode.Click += new System.EventHandler(this.WhatIsLiteMode_Click);
             // 
@@ -292,7 +293,7 @@ namespace Vight_Note
             this.Update.ForeColor = System.Drawing.Color.Black;
             this.Update.Image = global::Vight_Note.Properties.Resources.Update;
             this.Update.Name = "Update";
-            this.Update.Size = new System.Drawing.Size(359, 44);
+            this.Update.Size = new System.Drawing.Size(291, 44);
             this.Update.Text = "检查更新";
             this.Update.Click += new System.EventHandler(this.Update_Click);
             // 
@@ -301,7 +302,7 @@ namespace Vight_Note
             this.PrivacyPolicy.ForeColor = System.Drawing.Color.Black;
             this.PrivacyPolicy.Image = global::Vight_Note.Properties.Resources.Privacy;
             this.PrivacyPolicy.Name = "PrivacyPolicy";
-            this.PrivacyPolicy.Size = new System.Drawing.Size(359, 44);
+            this.PrivacyPolicy.Size = new System.Drawing.Size(291, 44);
             this.PrivacyPolicy.Text = "隐私政策";
             this.PrivacyPolicy.Click += new System.EventHandler(this.PrivacyPolicy_Click);
             // 
@@ -310,7 +311,7 @@ namespace Vight_Note
             this.About.ForeColor = System.Drawing.Color.Black;
             this.About.Image = global::Vight_Note.Properties.Resources.About;
             this.About.Name = "About";
-            this.About.Size = new System.Drawing.Size(359, 44);
+            this.About.Size = new System.Drawing.Size(291, 44);
             this.About.Text = "关于";
             this.About.Click += new System.EventHandler(this.About_Click);
             // 
@@ -320,11 +321,12 @@ namespace Vight_Note
             this.TextMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.TextMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.TextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Count});
+            this.Count,
+            this.Run});
             this.TextMenu.Name = "TextMenu";
             this.TextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.TextMenu.ShowCheckMargin = true;
-            this.TextMenu.Size = new System.Drawing.Size(223, 44);
+            this.TextMenu.Size = new System.Drawing.Size(339, 128);
             // 
             // Count
             // 
@@ -332,9 +334,18 @@ namespace Vight_Note
             this.Count.Image = global::Vight_Note.Properties.Resources.Count;
             this.Count.Name = "Count";
             this.Count.ShortcutKeyDisplayString = "";
-            this.Count.Size = new System.Drawing.Size(222, 40);
+            this.Count.Size = new System.Drawing.Size(338, 40);
             this.Count.Text = "字数统计";
             this.Count.Click += new System.EventHandler(this.Count_Click);
+            // 
+            // Run
+            // 
+            this.Run.ForeColor = System.Drawing.Color.Black;
+            this.Run.Image = global::Vight_Note.Properties.Resources.Run;
+            this.Run.Name = "Run";
+            this.Run.Size = new System.Drawing.Size(338, 40);
+            this.Run.Text = "智能运行";
+            this.Run.Click += new System.EventHandler(this.Run_Click);
             // 
             // MainForm
             // 
@@ -388,6 +399,7 @@ namespace Vight_Note
         private System.Windows.Forms.ToolStripMenuItem Export;
         private System.Windows.Forms.ContextMenuStrip TextMenu;
         private System.Windows.Forms.ToolStripMenuItem Count;
+        private System.Windows.Forms.ToolStripMenuItem Run;
     }
 }
 

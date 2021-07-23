@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -19,8 +20,15 @@ namespace Vight_Note
             public const string POLICY_URL = @"https://thoughts.teambition.com/share/609fd36543b2b70046b09b06";
             public const string THOUGHT_PING_URL = @"thoughts.teambition.com";
 
-            public static bool CHANGEMARK = false;
-            public static string FILEPATH = @"";
+            public const string URL_REGEX = //@"^(((ht|f)tp(s?))\://)?" +
+                                            @"^([a-zA-Z].)[a-zA-Z0-9\-\.]+\.(" +
+                                            @"com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk|cc|int|arpa|asia|pro|coop|aero|tv|top|xin|xyz|vip|cn|mobi|ru|de|pl|eu|io|jp|club|au|post|me|guru|expert|tw|mo|hk|fr|ar|pk|mv|in|it|ws|sh|my|cd|ac|li|co|cm|win|red|rec|travel|wang|ch|dj|er|ee|es|is|kr|mm|mn|no|ne|to|tr|za|ml|ga|xxx|porn|adult" +
+                                            @")(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$";
+
+            public const string EMAIL_REGEX = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
+
+            public static bool CHANGE_MARK = false;
+            public static string FILE_PATH = @"";
         }
 
         public MainForm(string[] args)
@@ -33,7 +41,7 @@ namespace Vight_Note
             //拖拽至图标打开文件
             if (args.Length >= 1)
             {
-                Define.FILEPATH = args[0];
+                Define.FILE_PATH = args[0];
                 ImportFile();
             }
         }
@@ -118,7 +126,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         private void Save_Click(object sender, EventArgs e)
         {
             //显示文件保存窗口，向用户获取保存路径
-            if (sender == Export || Define.FILEPATH == "")
+            if (sender == Export || Define.FILE_PATH == "")
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
 
@@ -136,25 +144,21 @@ $@"在我的印象里，这似乎是我第一次见到你
                 #endregion
 
                 if (saveDialog.ShowDialog() != DialogResult.OK)
-                {
                     return;
-                }
                 else
-                {
-                    Define.FILEPATH = saveDialog.FileName.ToString();   //文件路径
-                }
+                    Define.FILE_PATH = saveDialog.FileName.ToString();   //文件路径
             }
 
             //写文件
-            FileStream saver = new FileStream(Define.FILEPATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            FileStream saver = new FileStream(Define.FILE_PATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
             StreamWriter writer = new StreamWriter(saver);
             writer.Write(TextBox.Text);
             writer.Flush();
             writer.Close();
             saver.Close();
 
-            Text = Path.GetFileName(Define.FILEPATH);
-            Define.CHANGEMARK = false;
+            Text = Path.GetFileName(Define.FILE_PATH);
+            Define.CHANGE_MARK = false;
         }
         private void Export_Click(object sender, EventArgs e)
         {
@@ -182,7 +186,7 @@ $@"在我的印象里，这似乎是我第一次见到你
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                Define.FILEPATH = openDialog.FileName.ToString();   //文件路径
+                Define.FILE_PATH = openDialog.FileName.ToString();   //文件路径
                 ImportFile();
             }
         }
@@ -349,7 +353,23 @@ $@"在我的印象里，这似乎是我第一次见到你
 
         private void Count_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("字数统计: " + Convert.ToString(TextBox.SelectionLength));
+            MessageBox.Show(Convert.ToString(TextBox.SelectionLength), "字数统计");
+        }
+        private void Run_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CheckStrFormat(Define.URL_REGEX, TextBox.SelectedText))
+                    Process.Start("https://" + TextBox.SelectedText);   //网址
+                else if (CheckStrFormat(Define.EMAIL_REGEX, TextBox.SelectedText))
+                    Process.Start("mailto:" + TextBox.SelectedText);   //邮箱
+                else
+                    Process.Start(TextBox.SelectedText);    //文件路径
+            }
+            catch
+            {
+                Process.Start("https://www.baidu.com/s?wd=" + TextBox.SelectedText);    //百度搜索
+            }
         }
 
         //拖放
@@ -365,7 +385,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] path = (string[])e.Data.GetData(DataFormats.FileDrop);
-                Define.FILEPATH = path[0];
+                Define.FILE_PATH = path[0];
                 ImportFile();
             }
         }
@@ -451,10 +471,10 @@ $@"在我的印象里，这似乎是我第一次见到你
         //文件未保存标记
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!Define.CHANGEMARK)
+            if (!Define.CHANGE_MARK)
             {
                 Text += "*";
-                Define.CHANGEMARK = true;
+                Define.CHANGE_MARK = true;
             }
         }
         //导入
@@ -464,7 +484,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (LockTextBox.Checked)
                 return;
 
-            if (!System.IO.File.Exists(Define.FILEPATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILEPATH) != ".txt" && Path.GetExtension(Define.FILEPATH) != ".vtxt")))
+            if (!System.IO.File.Exists(Define.FILE_PATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILE_PATH) != ".txt" && Path.GetExtension(Define.FILE_PATH) != ".vtxt")))
             {
                 //非正常后缀提示
                 MessageBox.Show("请不要往我里面塞奇怪的东西...");
@@ -480,12 +500,18 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
 
             //读文件
-            FileStream importer = new FileStream(Define.FILEPATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            FileStream importer = new FileStream(Define.FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
             StreamReader reader = new StreamReader(importer);
             TextBox.Text = reader.ReadToEnd();
 
-            Text = Path.GetFileName(Define.FILEPATH);
-            Define.CHANGEMARK = false;
+            Text = Path.GetFileName(Define.FILE_PATH);
+            Define.CHANGE_MARK = false;
+        }
+        //字符串格式匹配
+        public static bool CheckStrFormat(string regexRule, string strValue)
+        {
+            Regex regex = new Regex(regexRule);
+            return regex.IsMatch(strValue);
         }
         //Ping检查连接
         private async Task<bool> CheckConnect()
@@ -494,15 +520,15 @@ $@"在我的印象里，这似乎是我第一次见到你
             try
             {
                 PingReply reply = await ping.SendPingAsync(Define.THOUGHT_PING_URL); //Ping Thought服务器
-                if (reply.Status == IPStatus.Success)   //连接成功
-                    return true;
-                else
+                if (reply.Status != IPStatus.Success)   //连接失败
                     throw new Exception("NetworkError");
             }
-            catch   //连接失败
+            catch
             {
                 return false;
             }
+
+            return true;    //连接成功
         }
         //项目信息
         private void AboutMe()

@@ -191,6 +191,7 @@
     <None Include="Resources\Save.png" />
     <None Include="Resources\Export.png" />
     <None Include="Resources\IdentityImg.jpg" />
+    <None Include="Resources\Run.png" />
     <Content Include="Vight Note Logo.ico" />
   </ItemGroup>
   <ItemGroup>

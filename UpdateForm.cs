@@ -86,10 +86,10 @@ namespace Vight_Note
         }
         private async void GithubButton_Click(object sender, EventArgs e)
         {
-            //判断是否已获取过Json
+            //没有获取过Json
             if (Define.RELEASE_JSON == "")
             {
-                //获取API返回的Json
+                //获取Github API返回的Json
                 if (!await GetReleaseJsonStep())
                     return;
             }
@@ -111,7 +111,11 @@ namespace Vight_Note
 
                 //解压安装包
                 TipLabel.Text = "正在解压安装包";
-                GetAppxFolder();
+                if (!GetAppxFolder())
+                {
+                    TipLabel.Text = "安装包解压失败，请重试";
+                    return;
+                }
 
                 //打开安装包
                 TipLabel.Text = "解压成功";
@@ -134,7 +138,7 @@ namespace Vight_Note
                 }
 
                 //打开安装包
-                TipLabel.Text = "解压成功";
+                TipLabel.Text = "下载成功";
                 Process.Start(Define.EXE_PATH);
 
                 Close();
@@ -158,7 +162,7 @@ namespace Vight_Note
             Close();
         }
 
-        //包含Ping和获取Json的步骤
+        //包含Ping和获取Json的步骤(包含异常处理)
         public async Task<bool> GetReleaseJsonStep()
         {
             //检测Github服务器连接
@@ -184,18 +188,19 @@ namespace Vight_Note
         private async Task<bool> CheckConnect()
         {
             Ping ping = new Ping();
+
             try
             {
                 PingReply reply = await ping.SendPingAsync(Define.GITHUBUSERCONTENT_PING_URL); //Ping Github服务器
-                if (reply.Status == IPStatus.Success)   //连接成功
-                    return true;
-                else
-                    throw new Exception("NetworkError");
+                if (reply.Status != IPStatus.Success)
+                    throw new Exception("NetworkError");    //连接失败
             }
-            catch   //连接失败
+            catch
             {
                 return false;
             }
+
+            return true;    //连接成功
         }
         //获取Github API返回的sting类型的json
         public async Task<string> GetReleaseJson()
@@ -206,8 +211,7 @@ namespace Vight_Note
 
             try
             {
-                //获取Json
-                return await client.GetStringAsync(Define.RELEASE_GITHUB_API_URL);
+                return await client.GetStringAsync(Define.RELEASE_GITHUB_API_URL);  //获取Json并返回
             }
             catch   //(HttpRequestException e)
             {
@@ -229,7 +233,7 @@ namespace Vight_Note
             //将Json转换为JObject
             JObject releaseJObject = JObject.Parse(Define.RELEASE_JSON);
 
-            //提取下载地址
+            //提取下载地址(如果[0]不符合则返回[1]否则返回[0])
             return (isPackage ^ releaseJObject["assets"][0]["browser_download_url"].ToString().Contains("Package")) ?
                 releaseJObject["assets"][1]["browser_download_url"].ToString() : releaseJObject["assets"][0]["browser_download_url"].ToString();
         }
@@ -248,23 +252,32 @@ namespace Vight_Note
                 FileStream saver = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
                 saver.Write(bytes, 0, bytes.Length);
                 saver.Close();
-
-                return true;
             }
             catch   //(HttpRequestException e)
             {
                 return false;
             }
+
+            return true;
         }
         //解压APPX的zip包
-        public void GetAppxFolder()
+        public bool GetAppxFolder()
         {
             //如果已经有解压后的文件夹则删除
             if (Directory.Exists(Define.APPX_PATH))
                 Directory.Delete(Define.APPX_PATH, true);
 
             //解压
-            ZipFile.ExtractToDirectory(Define.APPX_ZIP_PATH, Define.APPX_PATH);
+            try
+            {
+                ZipFile.ExtractToDirectory(Define.APPX_ZIP_PATH, Define.APPX_PATH);
+            }
+            catch
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
