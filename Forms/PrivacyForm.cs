@@ -29,10 +29,7 @@ namespace Vight_Note
         private void PrivacyBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
-            {
-                //关闭窗口
-                Close();
-            }
+                Close();    //关闭窗口
         }
     }
 }

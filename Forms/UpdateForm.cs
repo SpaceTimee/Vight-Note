@@ -279,5 +279,12 @@ namespace Vight_Note
 
             return true;
         }
+
+        //热键
+        private void UpdateForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+                Close();    //关闭窗口
+        }
     }
 }

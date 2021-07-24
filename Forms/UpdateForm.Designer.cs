@@ -169,6 +169,7 @@ namespace Vight_Note
             this.Controls.Add(this.TipLabel);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(92, 71);
@@ -178,6 +179,7 @@ namespace Vight_Note
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "检查更新";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UpdateForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

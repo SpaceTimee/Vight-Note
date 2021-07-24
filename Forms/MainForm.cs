@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Vight_Note.Forms;
 
 namespace Vight_Note
 {
@@ -24,6 +25,9 @@ namespace Vight_Note
                                             @"^([a-zA-Z].)[a-zA-Z0-9\-\.]+\.(" +
                                             @"com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk|cc|int|arpa|asia|pro|coop|aero|tv|top|xin|xyz|vip|cn|mobi|ru|de|pl|eu|io|jp|club|au|post|me|guru|expert|tw|mo|hk|fr|ar|pk|mv|in|it|ws|sh|my|cd|ac|li|co|cm|win|red|rec|travel|wang|ch|dj|er|ee|es|is|kr|mm|mn|no|ne|to|tr|za|ml|ga|xxx|porn|adult" +
                                             @")(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$";
+
+            public const string BAIDU_SEARCH_API = @"https://www.baidu.com/s?wd=";
+            public const string BAIDU_TRANSLATE_API = @"https://fanyi.baidu.com/#zh/en/";
 
             public const string EMAIL_REGEX = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
 
@@ -121,7 +125,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         {
             System.Environment.Exit(0);
 
-            //this.Close(); //旧版解决方案: 只关窗口(会出现杀不干净的情况)
+            //Close(); //旧版解决方案: 只关窗口(会出现杀不干净的情况)
         }
         private void Save_Click(object sender, EventArgs e)
         {
@@ -189,6 +193,11 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Define.FILE_PATH = openDialog.FileName.ToString();   //文件路径
                 ImportFile();
             }
+        }
+        private void Search_Click(object sender, EventArgs e)
+        {
+            SearchForm seachForm = new SearchForm(this);
+            seachForm.ShowDialog();
         }
         private void ImproveOpacity_Click(object sender, EventArgs e)
         {
@@ -274,13 +283,13 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (FormBorderStyle == FormBorderStyle.Sizable)
             {
                 //隐藏边框
-                OpenBorder.Text = "显示边框";
+                HideBorder.Text = "显示边框";
                 FormBorderStyle = FormBorderStyle.None;
             }
             else
             {
                 //显示边框
-                OpenBorder.Text = "隐藏边框";
+                HideBorder.Text = "隐藏边框";
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
@@ -368,8 +377,12 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
             catch
             {
-                Process.Start("https://www.baidu.com/s?wd=" + TextBox.SelectedText);    //百度搜索
+                Process.Start(Define.BAIDU_SEARCH_API + TextBox.SelectedText);    //百度搜索
             }
+        }
+        private void Translate_Click(object sender, EventArgs e)
+        {
+            Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText);    //百度翻译
         }
 
         //拖放
@@ -407,6 +420,8 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Export_Click(Export, new EventArgs());  //导出文件(另存为)
             else if (e.Control && e.KeyCode == Keys.O)
                 Import_Click(Import, new EventArgs());  //导入文件
+            else if (e.Control && e.KeyCode == Keys.F)
+                Search_Click(Search, new EventArgs());  //查找文本
             else if (e.Control && e.Alt && e.KeyCode == Keys.U)
                 ImproveOpacity_Click(ImproveOpacity, new EventArgs());  //透明度+
             else if (e.Control && e.Alt && e.KeyCode == Keys.D)
@@ -417,6 +432,10 @@ $@"在我的印象里，这似乎是我第一次见到你
                 LockTextBox_Click(LockTextBox, new EventArgs());    //锁定输入
             else if (e.Control && e.Alt && e.KeyCode == Keys.B)
                 DarkMode_Click(DarkMode, new EventArgs());    //夜间模式
+            else if (e.Control && e.Alt && e.KeyCode == Keys.R)
+                ScrollBar_Click(ScrollBar, new EventArgs());    //(显示)/(隐藏)滑块
+            else if (e.Control && e.Alt && e.KeyCode == Keys.H)
+                OpenBorder_Click(HideBorder, new EventArgs());    //(隐藏)/(显示)边框
         }
         private void FunctionMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
@@ -437,6 +456,11 @@ $@"在我的印象里，这似乎是我第一次见到你
                 FunctionMenu.Close();
                 Import_Click(Import, new EventArgs());  //导入文件
             }
+            else if (e.Control && e.KeyCode == Keys.F)
+            {
+                FunctionMenu.Close();
+                Search_Click(Search, new EventArgs());  //查找文本
+            }
         }
         //轻模式热键显示
         private void LiteShortcut(bool turnOn)
@@ -448,11 +472,14 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Save.ShortcutKeyDisplayString = "(S)";
                 Export.ShortcutKeyDisplayString = "(S)";
                 Import.ShortcutKeyDisplayString = "(O)";
+                Search.ShortcutKeyDisplayString = "(F)";
                 ImproveOpacity.ShortcutKeyDisplayString = "(U)";
                 ReduceOpacity.ShortcutKeyDisplayString = "(D)";
                 AlwaysTop.ShortcutKeyDisplayString = "(T)";
                 LockTextBox.ShortcutKeyDisplayString = "(L)";
                 DarkMode.ShortcutKeyDisplayString = "(B)";
+                ScrollBar.ShortcutKeyDisplayString = "(R)";
+                HideBorder.ShortcutKeyDisplayString = "(H)";
             }
             else
             {
@@ -461,11 +488,14 @@ $@"在我的印象里，这似乎是我第一次见到你
                 Save.ShortcutKeyDisplayString = "(Ctrl+S)";
                 Export.ShortcutKeyDisplayString = "(Alt+S)";
                 Import.ShortcutKeyDisplayString = "(Ctrl+O)";
+                Search.ShortcutKeyDisplayString = "(Ctrl+F)";
                 ImproveOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+U)";
                 ReduceOpacity.ShortcutKeyDisplayString = "(Ctrl+Alt+D)";
                 AlwaysTop.ShortcutKeyDisplayString = "(Ctrl+Alt+T)";
                 LockTextBox.ShortcutKeyDisplayString = "(Ctrl+Alt+L)";
                 DarkMode.ShortcutKeyDisplayString = "(Ctrl+Alt+B)";
+                ScrollBar.ShortcutKeyDisplayString = "(Ctrl+Alt+R)";
+                HideBorder.ShortcutKeyDisplayString = "(Ctrl+Alt+H)";
             }
         }
         //文件未保存标记

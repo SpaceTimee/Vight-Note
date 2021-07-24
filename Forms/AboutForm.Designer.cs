@@ -162,6 +162,7 @@ namespace Vight_Note
             this.Controls.Add(this.DeveloperLabel);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Black;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(92, 71);
@@ -171,6 +172,7 @@ namespace Vight_Note
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "关于";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AboutForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.IdentityPicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
