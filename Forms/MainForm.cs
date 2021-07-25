@@ -321,7 +321,8 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void About_Click(object sender, EventArgs e)
         {
-            AboutMe();
+            AboutForm aboutForm = new AboutForm(DarkMode.Checked);
+            aboutForm.ShowDialog();
         }
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
         {
@@ -559,12 +560,6 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
 
             return true;    //连接成功
-        }
-        //项目信息
-        private void AboutMe()
-        {
-            AboutForm aboutForm = new AboutForm(DarkMode.Checked);
-            aboutForm.ShowDialog();
         }
     }
 }
