@@ -21,7 +21,7 @@ namespace Vight_Note
                 "便签也需要休息呢","(｡･ω･｡)ﾉ♡" ,"Ciallo～(∠・ω< )⌒★","住在电脑里也很舒服呢~","便签和人类是两个物种",
                 "我不吃饭,我吃电", "胡萝卜是什么味道的呢?","棒棒糖是什么味道的呢?","外面的世界是什么样的?","(๑• . •๑)",
                 "更新失败就多试几次吧","主...主人?","轻模式是个好东西","?","你见过多少条关于呢?",
-                "试试用Esc键关闭弹窗吧"
+                "试试用Esc键关闭弹窗吧","1000001000","VmlnaHQ Tm90ZQ","​​​​‎‍‌​​​​‏‌​​​​​‏​‎​​​​‏​‏​​​​‏‎‌​​​​‌‌‍​​​​‎​‎​​​​‏‍‌​​​​‏‎‌​​​​‏​‌"
             };
         }
 
@@ -37,7 +37,7 @@ namespace Vight_Note
 
             //显示随机tip
             Random random = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
-            Text = $"关于: {Define.TIPS[random.Next(0, 31)]}";
+            Text = $"关于: {Define.TIPS[random.Next(0, Define.TIPS.Length)]}";
         }
         private void CheckDarkMode(bool isDarkMode)
         {

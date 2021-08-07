@@ -4,7 +4,6 @@ using System.Drawing;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
-using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
@@ -18,7 +17,6 @@ namespace Vight_Note
         public static class Define
         {
             public const string RELEASE_GITHUB_API_URL = @"https://api.github.com/repos/SpaceTimee/Vight-Note/releases/latest";
-            public const string GITHUBUSERCONTENT_PING_URL = @"github-releases.githubusercontent.com";
             public const string ACCEPT_HEADER = @"application/vnd.github.v3+json";
             public const string USER_AGENT_HEADER = @"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36";
 
@@ -57,9 +55,14 @@ namespace Vight_Note
 
         private async void UpdateButton_Click(object sender, System.EventArgs e)
         {
-            //获取API返回的Json
-            if (!await GetReleaseJsonStep())
+            //获取API返回的Json(不管是否已经获取过)
+            TipLabel.Text = "正在获取版本号";
+            Define.RELEASE_JSON = await GetReleaseJson();
+            if (Define.RELEASE_JSON == "")
+            {
+                TipLabel.Text = "版本号获取失败，请重试";
                 return;
+            }
 
             //解析版本号
             TipLabel.Text = "正在解析版本号";
@@ -71,27 +74,19 @@ namespace Vight_Note
             else
                 TipLabel.Text = "当前是最新版本";
         }
-        private void EraseButton_Click(object sender, EventArgs e)
-        {
-            TipLabel.Text = "正在清理残留文件";
-
-            if (File.Exists(Define.APPX_ZIP_PATH))
-                File.Delete(Define.APPX_ZIP_PATH);
-            if (Directory.Exists(Define.APPX_PATH))
-                Directory.Delete(Define.APPX_PATH, true);
-            if (File.Exists(Define.EXE_PATH))
-                File.Delete(Define.EXE_PATH);
-
-            TipLabel.Text = "清理成功";
-        }
         private async void GithubButton_Click(object sender, EventArgs e)
         {
             //没有获取过Json
             if (Define.RELEASE_JSON == "")
             {
-                //获取Github API返回的Json
-                if (!await GetReleaseJsonStep())
+                //获取API返回的Json
+                TipLabel.Text = "正在获取版本号";
+                Define.RELEASE_JSON = await GetReleaseJson();
+                if (Define.RELEASE_JSON == "")
+                {
+                    TipLabel.Text = "版本号获取失败，请重试";
                     return;
+                }
             }
 
             var result = MessageBox.Show("是否下载APPX包 (否则下载exe包)", "下载地址解析成功", MessageBoxButtons.YesNoCancel);
@@ -161,47 +156,33 @@ namespace Vight_Note
 
             Close();
         }
-
-        //包含Ping和获取Json的步骤(包含异常处理)
-        public async Task<bool> GetReleaseJsonStep()
+        private void EraseButton_Click(object sender, EventArgs e)
         {
-            //检测Github服务器连接
-            TipLabel.Text = "正在连接服务器";
-            if (!await CheckConnect())
+            bool isCleared = false;
+
+            TipLabel.Text = "正在清理残留文件";
+            if (File.Exists(Define.APPX_ZIP_PATH))
             {
-                TipLabel.Text = "服务器连接失败，请重试";
-                return false;
+                File.Delete(Define.APPX_ZIP_PATH);
+                isCleared = true;
+            }
+            if (Directory.Exists(Define.APPX_PATH))
+            {
+                Directory.Delete(Define.APPX_PATH, true);
+                isCleared = true;
+            }
+            if (File.Exists(Define.EXE_PATH))
+            {
+                File.Delete(Define.EXE_PATH);
+                isCleared = true;
             }
 
-            //获取API返回的Json
-            TipLabel.Text = "正在获取版本号";
-            Define.RELEASE_JSON = await GetReleaseJson();
-            if (Define.RELEASE_JSON == "")
-            {
-                TipLabel.Text = "版本号获取失败，请重试";
-                return false;
-            }
-
-            return true;
+            if (!isCleared)
+                TipLabel.Text = "已经一滴都不剩啦QAQ";
+            else
+                TipLabel.Text = "清理成功";
         }
-        //Ping检查连接
-        private async Task<bool> CheckConnect()
-        {
-            Ping ping = new Ping();
 
-            try
-            {
-                PingReply reply = await ping.SendPingAsync(Define.GITHUBUSERCONTENT_PING_URL); //Ping Github服务器
-                if (reply.Status != IPStatus.Success)
-                    throw new Exception("NetworkError");    //连接失败
-            }
-            catch
-            {
-                return false;
-            }
-
-            return true;    //连接成功
-        }
         //获取Github API返回的sting类型的json
         public async Task<string> GetReleaseJson()
         {
