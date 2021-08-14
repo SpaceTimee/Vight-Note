@@ -176,9 +176,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Vight Note Logo.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Vight Note Privacy Policy.txt" />
     <None Include="Resources\Import.png" />
     <None Include="Resources\Close.png" />
