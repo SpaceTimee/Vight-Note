@@ -12,7 +12,7 @@ namespace Vight_Note
 {
     public partial class MainForm : System.Windows.Forms.Form
     {
-        public static class Define
+        private static class Define
         {
             public const string NAME = @"Vight Note";
             public static readonly string VERSION = Application.ProductVersion;
@@ -32,10 +32,10 @@ namespace Vight_Note
             public const string BAIDU_TRANSLATE_API = @"https://fanyi.baidu.com/#zh/en/";
 
             public const string EMAIL_REGEX = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
-
-            public static bool CHANGE_MARK = false;
-            public static string FILE_PATH = @"";
         }
+
+        private static bool CHANGE_MARK = false;
+        private static string FILE_PATH = @"";
 
         public MainForm(string[] args)
         {
@@ -47,7 +47,7 @@ namespace Vight_Note
             //拖拽至图标打开文件
             if (args.Length >= 1)
             {
-                Define.FILE_PATH = args[0];
+                FILE_PATH = args[0];
                 ImportFile();
             }
         }
@@ -132,7 +132,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         private void Save_Click(object sender, EventArgs e)
         {
             //显示文件保存窗口，向用户获取保存路径
-            if (sender == Export || Define.FILE_PATH == "")
+            if (sender == Export || FILE_PATH == "")
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
 
@@ -152,19 +152,19 @@ $@"在我的印象里，这似乎是我第一次见到你
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
                 else
-                    Define.FILE_PATH = saveDialog.FileName.ToString();   //文件路径
+                    FILE_PATH = saveDialog.FileName.ToString();   //文件路径
             }
 
             //写文件
-            FileStream saver = new FileStream(Define.FILE_PATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            FileStream saver = new FileStream(FILE_PATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
             StreamWriter writer = new StreamWriter(saver);
             writer.Write(TextBox.Text);
             writer.Flush();
             writer.Close();
             saver.Close();
 
-            Text = Path.GetFileName(Define.FILE_PATH);
-            Define.CHANGE_MARK = false;
+            Text = Path.GetFileName(FILE_PATH);
+            CHANGE_MARK = false;
         }
         private void Export_Click(object sender, EventArgs e)
         {
@@ -192,7 +192,7 @@ $@"在我的印象里，这似乎是我第一次见到你
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
-                Define.FILE_PATH = openDialog.FileName.ToString();   //文件路径
+                FILE_PATH = openDialog.FileName.ToString();   //文件路径
                 ImportFile();
             }
         }
@@ -378,14 +378,21 @@ $@"在我的印象里，这似乎是我第一次见到你
                 else
                     Process.Start(TextBox.SelectedText);    //文件路径
             }
-            catch
+            catch   //百度搜索
             {
-                Process.Start(Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText));    //百度搜索
+                if (TextBox.SelectionLength > 3628)
+                    Process.Start(Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText.Substring(0, 3628)));    //最长32659(编码后汉字长度x9)
+                else
+                    Process.Start(Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText));    //正常选择
             }
         }
         private void Translate_Click(object sender, EventArgs e)
         {
-            Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText);    //百度翻译
+            //百度翻译
+            if (TextBox.SelectionLength > 32650)
+                Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText.Substring(0, 32655));    //最长32655
+            else
+                Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText);   //正常选择
         }
 
         //拖放
@@ -401,7 +408,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] path = (string[])e.Data.GetData(DataFormats.FileDrop);
-                Define.FILE_PATH = path[0];
+                FILE_PATH = path[0];
                 ImportFile();
             }
         }
@@ -504,10 +511,10 @@ $@"在我的印象里，这似乎是我第一次见到你
         //文件未保存标记
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!Define.CHANGE_MARK)
+            if (!CHANGE_MARK)
             {
                 Text += "*";
-                Define.CHANGE_MARK = true;
+                CHANGE_MARK = true;
             }
         }
         //导入
@@ -517,7 +524,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (LockTextBox.Checked)
                 return;
 
-            if (!System.IO.File.Exists(Define.FILE_PATH) || !LiteMode.Checked && ((Path.GetExtension(Define.FILE_PATH) != ".txt" && Path.GetExtension(Define.FILE_PATH) != ".vtxt")))
+            if (!System.IO.File.Exists(FILE_PATH) || !LiteMode.Checked && ((Path.GetExtension(FILE_PATH) != ".txt" && Path.GetExtension(FILE_PATH) != ".vtxt")))
             {
                 //非正常后缀提示
                 MessageBox.Show("请不要往我里面塞奇怪的东西...");
@@ -533,15 +540,15 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
 
             //读文件
-            FileStream importer = new FileStream(Define.FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            FileStream importer = new FileStream(FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
             StreamReader reader = new StreamReader(importer);
             TextBox.Text = reader.ReadToEnd();
 
-            Text = Path.GetFileName(Define.FILE_PATH);
-            Define.CHANGE_MARK = false;
+            Text = Path.GetFileName(FILE_PATH);
+            CHANGE_MARK = false;
         }
         //字符串格式匹配
-        public static bool CheckStrFormat(string regexRule, string strValue)
+        private bool CheckStrFormat(string regexRule, string strValue)
         {
             Regex regex = new Regex(regexRule);
             return regex.IsMatch(strValue);

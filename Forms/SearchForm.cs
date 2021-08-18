@@ -5,14 +5,14 @@ namespace Vight_Note.Forms
 {
     public partial class SearchForm : Form
     {
-        public static class Define
+        private static class Define
         {
             public static MainForm MAIN_FORM;
-
-            public static string SEARCH_TEXT = "";
-            public static int START_INDEX = -1, SELECT_LENGTH = 0;
-            public static int SEARCH_NUM = 0;
         }
+
+        private string SEARCH_TEXT = "";
+        private int START_INDEX = -1, SELECT_LENGTH = 0;
+        private int SEARCH_NUM = 0;
 
         public SearchForm(MainForm mainForm)
         {
@@ -33,33 +33,42 @@ namespace Vight_Note.Forms
                 return;
             }
 
-            //一次新的查找
-            if (SearchBox.Text.Trim() != Define.SEARCH_TEXT)
+            //开始一次新的查找
+            NewSearch();
+
+            //控制TextBox滚动，使选中的内容始终可见
+            Define.MAIN_FORM.TextBox.ScrollToCaret();
+        }
+
+        //一次新的查找
+        private void NewSearch()
+        {
+            if (SearchBox.Text.Trim() != SEARCH_TEXT)
             {
-                Define.SEARCH_TEXT = SearchBox.Text.Trim();
-                Define.START_INDEX = -1;
-                Define.SELECT_LENGTH = Define.SEARCH_TEXT.Length;
-                Define.SEARCH_NUM = 0;
+                SEARCH_TEXT = SearchBox.Text.Trim();
+                START_INDEX = -1;
+                SELECT_LENGTH = SEARCH_TEXT.Length;
+                SEARCH_NUM = 0;
             }
 
-            Define.START_INDEX = Define.MAIN_FORM.TextBox.Text.IndexOf(Define.SEARCH_TEXT, Define.START_INDEX + 1);
+            START_INDEX = Define.MAIN_FORM.TextBox.Text.IndexOf(SEARCH_TEXT, START_INDEX + 1);
 
-            if (Define.START_INDEX != -1)
+            if (START_INDEX != -1)
             {
                 //有查找结果
-                Define.MAIN_FORM.TextBox.Select(Define.START_INDEX, Define.SELECT_LENGTH);
-                Text = $"查找文本 (No.{++Define.SEARCH_NUM})";
+                Define.MAIN_FORM.TextBox.Select(START_INDEX, SELECT_LENGTH);
+                Text = $"查找文本 (No.{++SEARCH_NUM})";
             }
             else
             {
                 //无查找结果或已到文本末尾
-                Define.START_INDEX = Define.MAIN_FORM.TextBox.Text.IndexOf(Define.SEARCH_TEXT);
+                START_INDEX = Define.MAIN_FORM.TextBox.Text.IndexOf(SEARCH_TEXT);
 
-                if (Define.START_INDEX != -1)
+                if (START_INDEX != -1)
                 {
                     //已到文本末尾(提前查找一次)
-                    Define.MAIN_FORM.TextBox.Select(Define.START_INDEX, Define.SELECT_LENGTH);
-                    Define.SEARCH_NUM = 1;
+                    Define.MAIN_FORM.TextBox.Select(START_INDEX, SELECT_LENGTH);
+                    SEARCH_NUM = 1;
                     Text = $"查找文本 (No.1)";
                 }
                 else
@@ -69,11 +78,7 @@ namespace Vight_Note.Forms
                     Text = $"查找文本 (无结果)";
                 }
             }
-
-            //控制TextBox滚动，使选中的内容始终可见
-            Define.MAIN_FORM.TextBox.ScrollToCaret();
         }
-
         //热键
         private void SearchForm_KeyDown(object sender, KeyEventArgs e)
         {
