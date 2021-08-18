@@ -12,9 +12,7 @@ namespace Vight_Note
 {
     public partial class UpdateForm : Form
     {
-        private static readonly HttpClient client = new HttpClient();
-
-        public static class Define
+        private static class Define
         {
             public const string RELEASE_GITHUB_API_URL = @"https://api.github.com/repos/SpaceTimee/Vight-Note/releases/latest";
             public const string ACCEPT_HEADER = @"application/vnd.github.v3+json";
@@ -30,6 +28,8 @@ namespace Vight_Note
             public static bool IS_LITEMODE = false;
             public static string RELEASE_JSON = @"";
         }
+
+        private static readonly HttpClient client = new HttpClient();
 
         public UpdateForm(bool isDarkMode, bool isLiteMode)
         {
@@ -56,87 +56,38 @@ namespace Vight_Note
         private async void UpdateButton_Click(object sender, System.EventArgs e)
         {
             //获取API返回的Json(不管是否已经获取过)
-            TipLabel.Text = "正在获取版本号";
-            Define.RELEASE_JSON = await GetReleaseJson();
-            if (Define.RELEASE_JSON == "")
-            {
-                TipLabel.Text = "版本号获取失败，请重试";
+            if (!await UpdateGetReleaseJson())
                 return;
-            }
 
             //解析版本号
-            TipLabel.Text = "正在解析版本号";
-            LatestVersionLabel.Text = GetReleaseVersion();
+            UpdateGetGetReleaseVersion();
 
-            //检查更新结束后的处理
-            if (LocalVersionLabel.Text != LatestVersionLabel.Text)
-                TipLabel.Text = "有可用更新";
-            else
-                TipLabel.Text = "当前是最新版本";
+            //检查更新结束后判断是否有可用更新
+            UpdateGetGetResult();
         }
         private async void GithubButton_Click(object sender, EventArgs e)
         {
             //没有获取过Json
             if (Define.RELEASE_JSON == "")
-            {
-                //获取API返回的Json
-                TipLabel.Text = "正在获取版本号";
-                Define.RELEASE_JSON = await GetReleaseJson();
-                if (Define.RELEASE_JSON == "")
-                {
-                    TipLabel.Text = "版本号获取失败，请重试";
+                if (!await GithubGetReleaseJson())
                     return;
-                }
-            }
 
             var result = MessageBox.Show("是否下载APPX包 (否则下载exe包)", "下载地址解析成功", MessageBoxButtons.YesNoCancel);
             if (result == DialogResult.Yes)
             {
-                //解析安装包
-                TipLabel.Text = "正在解析安装包";
-                string releaseUrl = GetReleaseUrl(true);
-
-                //下载安装包
-                TipLabel.Text = "正在下载安装包";
-                if (!await GetRelease(releaseUrl, Define.APPX_ZIP_PATH))
-                {
-                    TipLabel.Text = "安装包下载失败，请重试";
+                //更新APPX包
+                if (!await GithubUpdateAppx())
                     return;
-                }
-
-                //解压安装包
-                TipLabel.Text = "正在解压安装包";
-                if (!GetAppxFolder())
-                {
-                    TipLabel.Text = "安装包解压失败，请重试";
-                    return;
-                }
-
-                //打开安装包
-                TipLabel.Text = "解压成功";
-                Process.Start(Define.APPX_PATH);
-
-                Close();
+                else
+                    Close();
             }
             else if (result == DialogResult.No)
             {
-                //解析安装包
-                TipLabel.Text = "正在解析安装包";
-                string releaseUrl = GetReleaseUrl(false);
-
-                //下载安装包
-                TipLabel.Text = "正在下载安装包";
-                if (!await GetRelease(releaseUrl, Define.EXE_PATH))
-                {
-                    TipLabel.Text = "安装包下载失败，请重试";
+                //更新EXE包
+                if (!await GithubUpdateExe())
                     return;
-                }
-
-                //打开安装包
-                TipLabel.Text = "下载成功";
-                Process.Start(Define.EXE_PATH);
-
-                Close();
+                else
+                    Close();
             }
         }
         private void LanzouButton_Click(object sender, EventArgs e)
@@ -183,8 +134,101 @@ namespace Vight_Note
                 TipLabel.Text = "清理成功";
         }
 
-        //获取Github API返回的sting类型的json
-        public async Task<string> GetReleaseJson()
+        //UpdateButton_Click中获取API返回的Json
+        private async Task<bool> UpdateGetReleaseJson()
+        {
+            TipLabel.Text = "正在获取版本号";
+            Define.RELEASE_JSON = await GetReleaseJson();
+            if (Define.RELEASE_JSON == "")
+            {
+                TipLabel.Text = "版本号获取失败，请重试";
+                return false;
+            }
+
+            return true;
+        }
+        //UpdateButton_Click中解析版本号
+        private void UpdateGetGetReleaseVersion()
+        {
+            TipLabel.Text = "正在解析版本号";
+            LatestVersionLabel.Text = GetReleaseVersion();
+        }
+        //UpdateButton_Click中判断是否有可用更新
+        private void UpdateGetGetResult()
+        {
+            if (LocalVersionLabel.Text != LatestVersionLabel.Text)
+                TipLabel.Text = "有可用更新";
+            else
+                TipLabel.Text = "当前是最新版本";
+        }
+
+        //GithubButton_Click中获取API返回的Json
+        private async Task<bool> GithubGetReleaseJson()
+        {
+            TipLabel.Text = "正在获取版本号";
+            Define.RELEASE_JSON = await GetReleaseJson();
+
+            if (Define.RELEASE_JSON == "")
+            {
+                TipLabel.Text = "版本号获取失败，请重试";
+                return false;
+            }
+
+            return true;
+        }
+        //GithubButton_Click中更新APPX包
+        private async Task<bool> GithubUpdateAppx()
+        {
+            //解析安装包
+            TipLabel.Text = "正在解析安装包";
+            string releaseUrl = GetReleaseUrl(true);
+
+            //下载安装包
+            TipLabel.Text = "正在下载安装包";
+            if (!await GetRelease(releaseUrl, Define.APPX_ZIP_PATH))
+            {
+                TipLabel.Text = "安装包下载失败，请重试";
+                return false;
+            }
+
+            //解压安装包
+            TipLabel.Text = "正在解压安装包";
+            if (!GetAppxFolder())
+            {
+                TipLabel.Text = "安装包解压失败，请重试";
+                return false;
+            }
+
+            //打开安装包
+            TipLabel.Text = "解压成功";
+            Process.Start(Define.APPX_PATH);
+
+            return true;
+        }
+        //GithubButton_Click中更新EXE包
+        private async Task<bool> GithubUpdateExe()
+        {
+            //解析安装包
+            TipLabel.Text = "正在解析安装包";
+            string releaseUrl = GetReleaseUrl(false);
+
+            //下载安装包
+            TipLabel.Text = "正在下载安装包";
+            if (!await GetRelease(releaseUrl, Define.EXE_PATH))
+            {
+                TipLabel.Text = "安装包下载失败，请重试";
+                return false;
+            }
+
+            //打开安装包
+            TipLabel.Text = "下载成功";
+            Process.Start(Define.EXE_PATH);
+
+            return true;
+        }
+
+        //获取API返回的sting类型的json
+        private async Task<string> GetReleaseJson()
         {
             //设置消息头
             client.DefaultRequestHeaders.Add("Accept", Define.ACCEPT_HEADER);
@@ -200,7 +244,7 @@ namespace Vight_Note
             }
         }
         //反序列化获取最新版本号
-        public string GetReleaseVersion()
+        private string GetReleaseVersion()
         {
             //将Json转换为JObject
             JObject releaseJObject = JObject.Parse(Define.RELEASE_JSON);
@@ -209,7 +253,7 @@ namespace Vight_Note
             return releaseJObject["name"].ToString();
         }
         //反序列化获取下载链接
-        public string GetReleaseUrl(bool isPackage)
+        private string GetReleaseUrl(bool isPackage)
         {
             //将Json转换为JObject
             JObject releaseJObject = JObject.Parse(Define.RELEASE_JSON);
@@ -242,7 +286,7 @@ namespace Vight_Note
             return true;
         }
         //解压APPX的zip包
-        public bool GetAppxFolder()
+        private bool GetAppxFolder()
         {
             //如果已经有解压后的文件夹则删除
             if (Directory.Exists(Define.APPX_PATH))
@@ -260,7 +304,6 @@ namespace Vight_Note
 
             return true;
         }
-
         //热键
         private void UpdateForm_KeyDown(object sender, KeyEventArgs e)
         {
