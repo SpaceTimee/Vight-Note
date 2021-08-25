@@ -42,16 +42,18 @@ namespace Vight_Note
             InitializeComponent();
 
             //欢迎界面和界面初始化
-            MainFormInit();
+            Task checkLiteModeTask = MainFormInit();
 
             //拖拽至图标打开文件
             if (args.Length >= 1)
             {
                 FILE_PATH = args[0];
-                ImportFile();
+                if(checkLiteModeTask != null)
+                    Task.WaitAll(checkLiteModeTask);
+                Task.Run(ImportFile);
             }
         }
-        private void MainFormInit()
+        private Task MainFormInit()
         {
             //判断IsFirstRun的值
             if (Properties.Settings.Default.IsFirstRun)
@@ -62,10 +64,12 @@ namespace Vight_Note
             else
             {
                 //不是第一次运行
-                CheckOpacity();
-                CheckDarkMode();
-                CheckLiteMode();
+                Task.Run(CheckDarkMode);
+                Task.Run(CheckOpacity);
+                return Task.Run(CheckLiteMode);
             }
+
+            return null;
         }
         private void Welcome()
         {
@@ -90,12 +94,6 @@ $@"在我的印象里，这似乎是我第一次见到你
             Properties.Settings.Default.IsFirstRun = false;
             Properties.Settings.Default.Save();
         }
-        private void CheckOpacity()
-        {
-            //设定Opacity的值
-            Opacity = Properties.Settings.Default.Opacity;
-            Properties.Settings.Default.Save();
-        }
         private void CheckDarkMode()
         {
             if (Properties.Settings.Default.IsDarkMode)
@@ -106,6 +104,12 @@ $@"在我的印象里，这似乎是我第一次见到你
                 TextBox.ForeColor = Color.Gray;
                 FunctionMenu.BackColor = Color.Gray;
             }
+        }
+        private void CheckOpacity()
+        {
+            //设定Opacity的值
+            Opacity = Properties.Settings.Default.Opacity;
+            Properties.Settings.Default.Save();
         }
         private void CheckLiteMode()
         {
@@ -542,7 +546,9 @@ $@"在我的印象里，这似乎是我第一次见到你
             //读文件
             FileStream importer = new FileStream(FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
             StreamReader reader = new StreamReader(importer);
+            //写文本
             TextBox.Text = reader.ReadToEnd();
+            TextBox.Select(0, 0);
 
             Text = Path.GetFileName(FILE_PATH);
             CHANGE_MARK = false;

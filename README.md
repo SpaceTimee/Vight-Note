@@ -21,12 +21,12 @@
 2. [使用协议](https://thoughts.teambition.com/share/60e11bdcad3f6b0046b0c3b2#title=Vight_Note_使用协议)
 
 ## 下载地址:
-1. Github (强烈推荐): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
+1. Github (首选): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
 2. 蓝奏云 (密码3a57) (大陆推荐): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
 3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
 
 ## 安装方式:
-1. APPX安装包 (强烈推荐): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
+1. APPX安装包 (首选): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
 2. EXE安装包 (不推荐): 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
 
 ## 使用场景举例:

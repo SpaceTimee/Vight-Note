@@ -117,7 +117,7 @@ namespace Vight_Note
             this.FunctionMenu.Name = "TextMenu";
             this.FunctionMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.FunctionMenu.ShowCheckMargin = true;
-            this.FunctionMenu.Size = new System.Drawing.Size(380, 678);
+            this.FunctionMenu.Size = new System.Drawing.Size(380, 634);
             this.FunctionMenu.Opening += new System.ComponentModel.CancelEventHandler(this.FunctionMenu_Opening);
             this.FunctionMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FunctionMenu_PreviewKeyDown);
             // 
