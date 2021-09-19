@@ -30,7 +30,6 @@ namespace Vight_Note
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.TextBox = new System.Windows.Forms.TextBox();
             this.FunctionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Create = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +72,7 @@ namespace Vight_Note
             this.TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TextBox.ContextMenuStrip = this.FunctionMenu;
             this.TextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TextBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TextBox.ForeColor = System.Drawing.Color.Black;
             this.TextBox.HideSelection = false;
             this.TextBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
@@ -117,7 +116,7 @@ namespace Vight_Note
             this.FunctionMenu.Name = "TextMenu";
             this.FunctionMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.FunctionMenu.ShowCheckMargin = true;
-            this.FunctionMenu.Size = new System.Drawing.Size(380, 678);
+            this.FunctionMenu.Size = new System.Drawing.Size(380, 634);
             this.FunctionMenu.Opening += new System.ComponentModel.CancelEventHandler(this.FunctionMenu_Opening);
             this.FunctionMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FunctionMenu_PreviewKeyDown);
             // 
@@ -277,7 +276,7 @@ namespace Vight_Note
             // LiteMode
             // 
             this.LiteMode.ForeColor = System.Drawing.Color.Black;
-            this.LiteMode.Image = ((System.Drawing.Image)(resources.GetObject("LiteMode.Image")));
+            this.LiteMode.Image = global::Vight_Note.Properties.Resources.Lite;
             this.LiteMode.Name = "LiteMode";
             this.LiteMode.Size = new System.Drawing.Size(379, 40);
             this.LiteMode.Text = "轻模式";

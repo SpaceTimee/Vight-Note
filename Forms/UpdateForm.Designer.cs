@@ -44,7 +44,7 @@ namespace Vight_Note
             // 
             this.TipLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.TipLabel.AutoSize = true;
-            this.TipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.TipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.TipLabel.Location = new System.Drawing.Point(31, 369);
             this.TipLabel.Margin = new System.Windows.Forms.Padding(0);
             this.TipLabel.Name = "TipLabel";
@@ -56,7 +56,7 @@ namespace Vight_Note
             // 
             this.LocalVersionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LocalVersionLabel.AutoSize = true;
-            this.LocalVersionLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LocalVersionLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LocalVersionLabel.Location = new System.Drawing.Point(140, 35);
             this.LocalVersionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.LocalVersionLabel.Name = "LocalVersionLabel";
@@ -67,7 +67,7 @@ namespace Vight_Note
             // UpdateButton
             // 
             this.UpdateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.UpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.UpdateButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.UpdateButton.Location = new System.Drawing.Point(31, 179);
             this.UpdateButton.Margin = new System.Windows.Forms.Padding(0);
             this.UpdateButton.Name = "UpdateButton";
@@ -81,7 +81,7 @@ namespace Vight_Note
             // 
             this.LatestVersionLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LatestVersionLabel.AutoSize = true;
-            this.LatestVersionLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LatestVersionLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LatestVersionLabel.Location = new System.Drawing.Point(140, 107);
             this.LatestVersionLabel.Margin = new System.Windows.Forms.Padding(0);
             this.LatestVersionLabel.Name = "LatestVersionLabel";
@@ -92,7 +92,7 @@ namespace Vight_Note
             // GithubButton
             // 
             this.GithubButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.GithubButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.GithubButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.GithubButton.Location = new System.Drawing.Point(31, 274);
             this.GithubButton.Margin = new System.Windows.Forms.Padding(0);
             this.GithubButton.Name = "GithubButton";
@@ -105,7 +105,7 @@ namespace Vight_Note
             // LanzouButton
             // 
             this.LanzouButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.LanzouButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.LanzouButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.LanzouButton.Location = new System.Drawing.Point(215, 274);
             this.LanzouButton.Margin = new System.Windows.Forms.Padding(0);
             this.LanzouButton.Name = "LanzouButton";
@@ -119,7 +119,7 @@ namespace Vight_Note
             // 
             this.LatestVersionTipLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LatestVersionTipLabel.AutoSize = true;
-            this.LatestVersionTipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LatestVersionTipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LatestVersionTipLabel.Location = new System.Drawing.Point(31, 107);
             this.LatestVersionTipLabel.Margin = new System.Windows.Forms.Padding(0);
             this.LatestVersionTipLabel.Name = "LatestVersionTipLabel";
@@ -131,7 +131,7 @@ namespace Vight_Note
             // 
             this.LocalVersionTipLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.LocalVersionTipLabel.AutoSize = true;
-            this.LocalVersionTipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.LocalVersionTipLabel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LocalVersionTipLabel.Location = new System.Drawing.Point(31, 35);
             this.LocalVersionTipLabel.Margin = new System.Windows.Forms.Padding(0);
             this.LocalVersionTipLabel.Name = "LocalVersionTipLabel";
@@ -142,7 +142,7 @@ namespace Vight_Note
             // EraseButton
             // 
             this.EraseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.EraseButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.EraseButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.EraseButton.Location = new System.Drawing.Point(215, 179);
             this.EraseButton.Margin = new System.Windows.Forms.Padding(0);
             this.EraseButton.Name = "EraseButton";

@@ -48,7 +48,7 @@ namespace Vight_Note.Forms
             this.SearchFormTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.SearchFormTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.SearchFormTableLayoutPanel.Name = "SearchFormTableLayoutPanel";
-            this.SearchFormTableLayoutPanel.Padding = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.SearchFormTableLayoutPanel.Padding = new System.Windows.Forms.Padding(7, 0, 5, 5);
             this.SearchFormTableLayoutPanel.RowCount = 1;
             this.SearchFormTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.SearchFormTableLayoutPanel.Size = new System.Drawing.Size(404, 48);
@@ -58,25 +58,24 @@ namespace Vight_Note.Forms
             // 
             this.SearchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.SearchBox.BackColor = System.Drawing.Color.White;
-            this.SearchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SearchBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SearchBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchBox.ForeColor = System.Drawing.Color.Black;
             this.SearchBox.HideSelection = false;
             this.SearchBox.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.SearchBox.Location = new System.Drawing.Point(3, 0);
+            this.SearchBox.Location = new System.Drawing.Point(7, 0);
             this.SearchBox.Margin = new System.Windows.Forms.Padding(0);
             this.SearchBox.MaxLength = 2147483647;
             this.SearchBox.Name = "SearchBox";
-            this.SearchBox.Size = new System.Drawing.Size(354, 44);
+            this.SearchBox.Size = new System.Drawing.Size(348, 44);
             this.SearchBox.TabIndex = 1;
+            this.SearchBox.TextChanged += new System.EventHandler(this.SearchBox_TextChanged);
             // 
             // SearchButton
             // 
             this.SearchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.SearchButton.BackgroundImage = global::Vight_Note.Properties.Resources.Search;
             this.SearchButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.SearchButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SearchButton.Location = new System.Drawing.Point(357, 0);
+            this.SearchButton.Location = new System.Drawing.Point(355, 0);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(0);
             this.SearchButton.Name = "SearchButton";
             this.SearchButton.Size = new System.Drawing.Size(44, 44);
