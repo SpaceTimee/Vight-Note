@@ -22,7 +22,6 @@ namespace Vight_Note.Forms
             Define.MAIN_FORM = mainForm;
         }
 
-
         private void SearchBox_TextChanged(object sender, EventArgs e)
         {
             SearchButton.BackgroundImage = Vight_Note.Properties.Resources.Search;

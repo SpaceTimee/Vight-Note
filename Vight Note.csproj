@@ -50,6 +50,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>false</GenerateManifests>
+    <PackageId>SpaceTime.Vight.Note</PackageId>
+    <Authors>Space Time</Authors>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="packages\**" />
