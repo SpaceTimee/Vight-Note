@@ -51,6 +51,7 @@ namespace Vight_Note
             this.HideBorder = new System.Windows.Forms.ToolStripMenuItem();
             this.LiteMode = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.Settings = new System.Windows.Forms.ToolStripMenuItem();
             this.Help = new System.Windows.Forms.ToolStripMenuItem();
             this.WhatIsLiteMode = new System.Windows.Forms.ToolStripMenuItem();
             this.Update = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,11 +113,12 @@ namespace Vight_Note
             this.HideBorder,
             this.LiteMode,
             this.toolStripSeparator4,
+            this.Settings,
             this.Help});
             this.FunctionMenu.Name = "TextMenu";
             this.FunctionMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.FunctionMenu.ShowCheckMargin = true;
-            this.FunctionMenu.Size = new System.Drawing.Size(380, 634);
+            this.FunctionMenu.Size = new System.Drawing.Size(380, 718);
             this.FunctionMenu.Opening += new System.ComponentModel.CancelEventHandler(this.FunctionMenu_Opening);
             this.FunctionMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.FunctionMenu_PreviewKeyDown);
             // 
@@ -288,6 +290,15 @@ namespace Vight_Note
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(376, 6);
             // 
+            // Settings
+            // 
+            this.Settings.ForeColor = System.Drawing.Color.Black;
+            this.Settings.Image = global::Vight_Note.Properties.Resources.Settings;
+            this.Settings.Name = "Settings";
+            this.Settings.Size = new System.Drawing.Size(379, 40);
+            this.Settings.Text = "设置";
+            this.Settings.Click += new System.EventHandler(this.Settings_Click);
+            // 
             // Help
             // 
             this.Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -441,6 +452,7 @@ namespace Vight_Note
         private System.Windows.Forms.ToolStripMenuItem Search;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         internal System.Windows.Forms.TextBox TextBox;
+        private System.Windows.Forms.ToolStripMenuItem Settings;
     }
 }
 
