@@ -31,8 +31,6 @@ namespace Vight_Note.Forms
         {
             this.SettingsMenu = new System.Windows.Forms.MenuStrip();
             this.OpacitySetting = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.PagePanel = new System.Windows.Forms.Panel();
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
@@ -45,9 +43,7 @@ namespace Vight_Note.Forms
             this.SettingsMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.SettingsMenu.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.SettingsMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpacitySetting,
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2});
+            this.OpacitySetting});
             this.SettingsMenu.Location = new System.Drawing.Point(0, 0);
             this.SettingsMenu.Name = "SettingsMenu";
             this.SettingsMenu.ShowItemToolTips = true;
@@ -65,16 +61,6 @@ namespace Vight_Note.Forms
             this.OpacitySetting.Text = "透明度";
             this.OpacitySetting.ToolTipText = "调整窗口透明度";
             this.OpacitySetting.Click += new System.EventHandler(this.OpacitySetting_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(236, 4);
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(236, 4);
             // 
             // PagePanel
             // 
@@ -118,8 +104,6 @@ namespace Vight_Note.Forms
 
         private System.Windows.Forms.MenuStrip SettingsMenu;
         private System.Windows.Forms.ToolStripMenuItem OpacitySetting;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.Panel PagePanel;
     }
 }

@@ -36,7 +36,7 @@ namespace Vight_Note
             VersionLabel.Text = "版本号: " + Application.ProductVersion;
 
             //显示随机tip
-            Random random = new Random((int)DateTime.Now.Ticks & 0x0000FFFF);
+            Random random = new((int)DateTime.Now.Ticks & 0x0000FFFF);
             Text = $"关于: {Define.TIPS[random.Next(0, Define.TIPS.Length)]}";
         }
         private void CheckDarkMode(bool isDarkMode)
@@ -56,15 +56,18 @@ namespace Vight_Note
 
         private void MainPageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(Define.MAINPAGE_URL);
+            MainForm.processStartInfo.FileName = Define.MAINPAGE_URL;
+            Process.Start(MainForm.processStartInfo);
         }
         private void OpenSourceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(Define.OPENSOURCE_URL);
+            MainForm.processStartInfo.FileName = Define.OPENSOURCE_URL;
+            Process.Start(MainForm.processStartInfo);
         }
         private void EmailLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("mailto:" + Define.EMAIL);
+            MainForm.processStartInfo.FileName = "mailto:" + Define.EMAIL;
+            Process.Start(MainForm.processStartInfo);
         }
 
         //热键

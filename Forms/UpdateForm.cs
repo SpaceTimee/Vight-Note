@@ -29,7 +29,7 @@ namespace Vight_Note
             public static string RELEASE_JSON = @"";
         }
 
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
 
         public UpdateForm(bool isDarkMode, bool isLiteMode)
         {
@@ -103,7 +103,8 @@ namespace Vight_Note
                     return;
             }
 
-            Process.Start(Define.RELEASE_LANZOU_URL);
+            MainForm.processStartInfo.FileName = Define.RELEASE_LANZOU_URL;
+            Process.Start(MainForm.processStartInfo);
 
             Close();
         }
@@ -201,7 +202,8 @@ namespace Vight_Note
 
             //打开安装包
             TipLabel.Text = "解压成功";
-            Process.Start(Define.APPX_PATH);
+            MainForm.processStartInfo.FileName = Define.APPX_PATH;
+            Process.Start(MainForm.processStartInfo);
 
             return true;
         }
@@ -222,13 +224,14 @@ namespace Vight_Note
 
             //打开安装包
             TipLabel.Text = "下载成功";
-            Process.Start(Define.EXE_PATH);
+            MainForm.processStartInfo.FileName = Define.EXE_PATH;
+            Process.Start(MainForm.processStartInfo);
 
             return true;
         }
 
         //获取API返回的sting类型的json
-        private async Task<string> GetReleaseJson()
+        private static async Task<string> GetReleaseJson()
         {
             //设置消息头
             client.DefaultRequestHeaders.Add("Accept", Define.ACCEPT_HEADER);
@@ -244,7 +247,7 @@ namespace Vight_Note
             }
         }
         //反序列化获取最新版本号
-        private string GetReleaseVersion()
+        private static string GetReleaseVersion()
         {
             //将Json转换为JObject
             JObject releaseJObject = JObject.Parse(Define.RELEASE_JSON);
@@ -253,7 +256,7 @@ namespace Vight_Note
             return releaseJObject["name"].ToString();
         }
         //反序列化获取下载链接
-        private string GetReleaseUrl(bool isPackage)
+        private static string GetReleaseUrl(bool isPackage)
         {
             //将Json转换为JObject
             JObject releaseJObject = JObject.Parse(Define.RELEASE_JSON);
@@ -263,7 +266,7 @@ namespace Vight_Note
                 releaseJObject["assets"][1]["browser_download_url"].ToString() : releaseJObject["assets"][0]["browser_download_url"].ToString();
         }
         //下载更新文件
-        private async Task<bool> GetRelease(string releaseUrl, string filePath)
+        private static async Task<bool> GetRelease(string releaseUrl, string filePath)
         {
             //设置消息头
             client.DefaultRequestHeaders.Add("User-Agent", Define.USER_AGENT_HEADER);
@@ -274,7 +277,7 @@ namespace Vight_Note
                 byte[] bytes = await client.GetByteArrayAsync(releaseUrl);
 
                 //写入本地文件
-                FileStream saver = new FileStream(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+                FileStream saver = new(filePath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
                 saver.Write(bytes, 0, bytes.Length);
                 saver.Close();
             }
@@ -286,7 +289,7 @@ namespace Vight_Note
             return true;
         }
         //解压APPX的zip包
-        private bool GetAppxFolder()
+        private static bool GetAppxFolder()
         {
             //如果已经有解压后的文件夹则删除
             if (Directory.Exists(Define.APPX_PATH))

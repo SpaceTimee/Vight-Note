@@ -34,10 +34,12 @@ namespace Vight_Note.Forms
 
         private void OpacitySetting_Click(object sender, System.EventArgs e)
         {
-            OpacityPage opacityPage = new OpacityPage(Define.IS_DARK_MODE);
-            opacityPage.MdiParent = this;
-            opacityPage.Parent = PagePanel;
-            opacityPage.Size = new Size(PagePanel.Width - 34, PagePanel.Height);
+            OpacityPage opacityPage = new(Define.IS_DARK_MODE)
+            {
+                MdiParent = this,
+                Parent = PagePanel,
+                Size = new Size(PagePanel.Width - 34, PagePanel.Height)
+            };
             opacityPage.Show();
         }
 

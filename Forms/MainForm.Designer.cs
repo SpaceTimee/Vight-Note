@@ -34,16 +34,16 @@ namespace Vight_Note
             this.FunctionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Create = new System.Windows.Forms.ToolStripMenuItem();
             this.Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Separator1 = new System.Windows.Forms.ToolStripSeparator();
             this.Save = new System.Windows.Forms.ToolStripMenuItem();
             this.Export = new System.Windows.Forms.ToolStripMenuItem();
             this.Import = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.Separator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Search = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.Separator3 = new System.Windows.Forms.ToolStripSeparator();
             this.ImproveOpacity = new System.Windows.Forms.ToolStripMenuItem();
             this.ReduceOpacity = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.Separator4 = new System.Windows.Forms.ToolStripSeparator();
             this.AlwaysTop = new System.Windows.Forms.ToolStripMenuItem();
             this.LockTextBox = new System.Windows.Forms.ToolStripMenuItem();
             this.DarkMode = new System.Windows.Forms.ToolStripMenuItem();
@@ -96,16 +96,16 @@ namespace Vight_Note
             this.FunctionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Create,
             this.Close,
-            this.toolStripSeparator1,
+            this.Separator1,
             this.Save,
             this.Export,
             this.Import,
-            this.toolStripSeparator2,
+            this.Separator2,
             this.Search,
-            this.toolStripSeparator6,
+            this.Separator3,
             this.ImproveOpacity,
             this.ReduceOpacity,
-            this.toolStripSeparator3,
+            this.Separator4,
             this.AlwaysTop,
             this.LockTextBox,
             this.DarkMode,
@@ -142,11 +142,11 @@ namespace Vight_Note
             this.Close.Text = "关闭窗口";
             this.Close.Click += new System.EventHandler(this.Close_Click);
             // 
-            // toolStripSeparator1
+            // Separator1
             // 
-            this.toolStripSeparator1.ForeColor = System.Drawing.Color.Black;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(376, 6);
+            this.Separator1.ForeColor = System.Drawing.Color.Black;
+            this.Separator1.Name = "Separator1";
+            this.Separator1.Size = new System.Drawing.Size(376, 6);
             // 
             // Save
             // 
@@ -178,11 +178,11 @@ namespace Vight_Note
             this.Import.Text = "导入文件";
             this.Import.Click += new System.EventHandler(this.Import_Click);
             // 
-            // toolStripSeparator2
+            // Separator2
             // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Black;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(376, 6);
+            this.Separator2.ForeColor = System.Drawing.Color.Black;
+            this.Separator2.Name = "Separator2";
+            this.Separator2.Size = new System.Drawing.Size(376, 6);
             // 
             // Search
             // 
@@ -194,10 +194,10 @@ namespace Vight_Note
             this.Search.Text = "查找文本";
             this.Search.Click += new System.EventHandler(this.Search_Click);
             // 
-            // toolStripSeparator6
+            // Separator3
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(376, 6);
+            this.Separator3.Name = "Separator3";
+            this.Separator3.Size = new System.Drawing.Size(376, 6);
             // 
             // ImproveOpacity
             // 
@@ -219,11 +219,11 @@ namespace Vight_Note
             this.ReduceOpacity.Text = "透明度-";
             this.ReduceOpacity.Click += new System.EventHandler(this.ReduceOpacity_Click);
             // 
-            // toolStripSeparator3
+            // Separator4
             // 
-            this.toolStripSeparator3.ForeColor = System.Drawing.Color.Black;
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(376, 6);
+            this.Separator4.ForeColor = System.Drawing.Color.Black;
+            this.Separator4.Name = "Separator4";
+            this.Separator4.Size = new System.Drawing.Size(376, 6);
             // 
             // AlwaysTop
             // 
@@ -438,9 +438,9 @@ namespace Vight_Note
         private System.Windows.Forms.ToolStripMenuItem LockTextBox;
         private System.Windows.Forms.ToolStripMenuItem WhatIsLiteMode;
         private System.Windows.Forms.ToolStripMenuItem ScrollBar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripSeparator Separator1;
+        private System.Windows.Forms.ToolStripSeparator Separator2;
+        private System.Windows.Forms.ToolStripSeparator Separator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem PrivacyPolicy;
         private System.Windows.Forms.ToolStripMenuItem Export;
@@ -450,7 +450,7 @@ namespace Vight_Note
         private System.Windows.Forms.ToolStripMenuItem Translate;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem Search;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripSeparator Separator3;
         internal System.Windows.Forms.TextBox TextBox;
         private System.Windows.Forms.ToolStripMenuItem Settings;
     }

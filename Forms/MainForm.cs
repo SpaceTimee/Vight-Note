@@ -34,6 +34,7 @@ namespace Vight_Note
             public const string EMAIL_REGEX = @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$";
         }
 
+        internal static ProcessStartInfo processStartInfo = new() { UseShellExecute = true };
         private static bool CHANGE_MARK = false;
         private static string FILE_PATH = @"";
 
@@ -71,7 +72,7 @@ namespace Vight_Note
 
             return null;
         }
-        private void Welcome()
+        private static void Welcome()
         {
             //显示欢迎界面
             MessageBox.Show
@@ -123,7 +124,10 @@ $@"在我的印象里，这似乎是我第一次见到你
         private void Create_Click(object sender, EventArgs e)
         {
             if (File.Exists(Application.ExecutablePath))
-                Process.Start(Application.ExecutablePath);
+            {
+                processStartInfo.FileName = Application.ExecutablePath;
+                Process.Start(processStartInfo);
+            }
             else
                 MessageBox.Show("创建失败，可能是文件路径损坏导致的，重新安装可能可以解决哦");
         }
@@ -136,7 +140,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             //显示文件保存窗口，向用户获取保存路径
             if (sender == Export || FILE_PATH == "")
             {
-                SaveFileDialog saveDialog = new SaveFileDialog();
+                SaveFileDialog saveDialog = new();
 
                 #region 配置saveDialog的参数
                 saveDialog.Title = "Vight Saver";
@@ -158,8 +162,8 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
 
             //写文件
-            FileStream saver = new FileStream(FILE_PATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
-            StreamWriter writer = new StreamWriter(saver);
+            FileStream saver = new(FILE_PATH, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            StreamWriter writer = new(saver);
             writer.Write(TextBox.Text);
             writer.Flush();
             writer.Close();
@@ -174,7 +178,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Import_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openDialog = new OpenFileDialog();
+            OpenFileDialog openDialog = new();
 
             #region 配置openDialog的参数
             openDialog.Title = "Vight Importer";
@@ -200,7 +204,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Search_Click(object sender, EventArgs e)
         {
-            SearchForm seachForm = new SearchForm(this, DarkMode.Checked);
+            SearchForm seachForm = new(this, DarkMode.Checked);
             seachForm.ShowDialog();
         }
         private void ImproveOpacity_Click(object sender, EventArgs e)
@@ -320,17 +324,17 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Settings_Click(object sender, EventArgs e)
         {
-            SettingsForm settingsForm = new SettingsForm(DarkMode.Checked);
+            SettingsForm settingsForm = new(DarkMode.Checked);
             settingsForm.ShowDialog();
         }
         private void Update_Click(object sender, EventArgs e)
         {
-            UpdateForm updateForm = new UpdateForm(DarkMode.Checked, LiteMode.Checked);
+            UpdateForm updateForm = new(DarkMode.Checked, LiteMode.Checked);
             updateForm.ShowDialog();
         }
         private void About_Click(object sender, EventArgs e)
         {
-            AboutForm aboutForm = new AboutForm(DarkMode.Checked);
+            AboutForm aboutForm = new(DarkMode.Checked);
             aboutForm.ShowDialog();
         }
         private void WhatIsLiteMode_Click(object sender, EventArgs e)
@@ -352,11 +356,12 @@ $@"在我的印象里，这似乎是我第一次见到你
 
             if (viewOnline)
             {
-                Process.Start(Define.POLICY_URL);
+                processStartInfo.FileName = Define.POLICY_URL;
+                Process.Start(processStartInfo);
             }
             else
             {
-                PrivacyForm privacyForm = new PrivacyForm(DarkMode.Checked);
+                PrivacyForm privacyForm = new(DarkMode.Checked);
                 privacyForm.ShowDialog();
             }
         }
@@ -379,27 +384,48 @@ $@"在我的印象里，这似乎是我第一次见到你
             try
             {
                 if (CheckStrFormat(Define.URL_REGEX, TextBox.SelectedText))
-                    Process.Start("https://" + TextBox.SelectedText);   //网址
+                {
+                    processStartInfo.FileName = "https://" + TextBox.SelectedText;
+                    Process.Start(processStartInfo);   //网址
+                }
                 else if (CheckStrFormat(Define.EMAIL_REGEX, TextBox.SelectedText))
-                    Process.Start("mailto:" + TextBox.SelectedText);   //邮箱
+                {
+                    processStartInfo.FileName = "mailto:" + TextBox.SelectedText;
+                    Process.Start(processStartInfo);   //邮箱
+                }
                 else
-                    Process.Start(TextBox.SelectedText);    //文件路径
+                {
+                    processStartInfo.FileName = TextBox.SelectedText;
+                    Process.Start(processStartInfo);    //文件路径
+                }
             }
             catch   //百度搜索
             {
                 if (TextBox.SelectionLength > 3628)
-                    Process.Start(Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText.Substring(0, 3628)));    //最长32659(编码后汉字长度x9)
+                {
+                    processStartInfo.FileName = Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText.Substring(0, 3628));
+                    Process.Start(processStartInfo);    //最长32659(编码后汉字长度x9)
+                }
                 else
-                    Process.Start(Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText));    //正常选择
+                {
+                    processStartInfo.FileName = Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText);
+                    Process.Start(processStartInfo);    //正常选择
+                }
             }
         }
         private void Translate_Click(object sender, EventArgs e)
         {
             //百度翻译
             if (TextBox.SelectionLength > 32650)
-                Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText.Substring(0, 32655));    //最长32655
+            {
+                processStartInfo.FileName = Define.BAIDU_TRANSLATE_API + TextBox.SelectedText.Substring(0, 32655);
+                Process.Start(processStartInfo);    //最长32655
+            }
             else
-                Process.Start(Define.BAIDU_TRANSLATE_API + TextBox.SelectedText);   //正常选择
+            {
+                processStartInfo.FileName = Define.BAIDU_TRANSLATE_API + TextBox.SelectedText;
+                Process.Start(processStartInfo);   //正常选择
+            }
         }
 
         //拖放
@@ -547,8 +573,8 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
 
             //读文件
-            FileStream importer = new FileStream(FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
-            StreamReader reader = new StreamReader(importer);
+            FileStream importer = new(FILE_PATH, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete);
+            StreamReader reader = new(importer);
             //写文本
             TextBox.Text = reader.ReadToEnd();
             TextBox.Select(0, 0);
@@ -557,15 +583,15 @@ $@"在我的印象里，这似乎是我第一次见到你
             CHANGE_MARK = false;
         }
         //字符串格式匹配
-        private bool CheckStrFormat(string regexRule, string strValue)
+        private static bool CheckStrFormat(string regexRule, string strValue)
         {
-            Regex regex = new Regex(regexRule);
+            Regex regex = new(regexRule);
             return regex.IsMatch(strValue);
         }
         //Ping检查连接
-        private async Task<bool> CheckConnect()
+        private static async Task<bool> CheckConnect()
         {
-            Ping ping = new Ping();
+            Ping ping = new();
             try
             {
                 PingReply reply = await ping.SendPingAsync(Define.THOUGHT_PING_URL); //Ping Thought服务器
