@@ -10,7 +10,7 @@ using Vight_Note.Forms;
 
 namespace Vight_Note
 {
-    public partial class MainForm : System.Windows.Forms.Form
+    public partial class MainForm : Form
     {
         private static class Define
         {
@@ -42,18 +42,16 @@ namespace Vight_Note
             InitializeComponent();
 
             //欢迎界面和界面初始化
-            Task checkLiteModeTask = MainFormInit();
+            MainFormInit();
 
             //拖拽至图标打开文件
             if (args.Length >= 1)
             {
                 FILE_PATH = args[0];
-                if (checkLiteModeTask != null)
-                    Task.WaitAll(checkLiteModeTask);
-                Task.Run(ImportFile);
+                ImportFile();
             }
         }
-        private Task MainFormInit()
+        private void MainFormInit()
         {
             //判断IsFirstRun的值
             if (Properties.Settings.Default.IsFirstRun)
@@ -64,12 +62,10 @@ namespace Vight_Note
             else
             {
                 //不是第一次运行
-                Task.Run(CheckDarkMode);
-                Task.Run(CheckOpacity);
-                return Task.Run(CheckLiteMode);
+                CheckDarkMode();
+                CheckOpacity();
+                CheckLiteMode();
             }
-
-            return null;
         }
         private void Welcome()
         {
@@ -242,6 +238,52 @@ $@"在我的印象里，这似乎是我第一次见到你
                 TextBox.ReadOnly = !TextBox.ReadOnly;
             }
         }
+        private void ScrollBar_Click(object sender, EventArgs e)
+        {
+            if (TextBox.ScrollBars == ScrollBars.None)
+            {
+                //显示滚动条
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    ScrollBar.Text = "隐藏滑块";
+                else
+                    ScrollBar.Text = "HideScroller";
+
+                TextBox.ScrollBars = ScrollBars.Vertical;
+            }
+            else
+            {
+                //隐藏滚动条
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    ScrollBar.Text = "显示滑块";
+                else
+                    ScrollBar.Text = "ShowScroller";
+
+                TextBox.ScrollBars = ScrollBars.None;
+            }
+        }
+        private void OpenBorder_Click(object sender, EventArgs e)
+        {
+            if (FormBorderStyle == FormBorderStyle.Sizable)
+            {
+                //隐藏边框
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    HideBorder.Text = "显示边框";
+                else
+                    HideBorder.Text = "ShowBorder";
+
+                FormBorderStyle = FormBorderStyle.None;
+            }
+            else
+            {
+                //显示边框
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    HideBorder.Text = "隐藏边框";
+                else
+                    HideBorder.Text = "HideBorder";
+
+                FormBorderStyle = FormBorderStyle.Sizable;
+            }
+        }
         private void DarkMode_Click(object sender, EventArgs e)
         {
             if (!DarkMode.Checked)
@@ -265,36 +307,6 @@ $@"在我的印象里，这似乎是我第一次见到你
                 TextBox.BackColor = Color.White;
                 TextBox.ForeColor = Color.Black;
                 FunctionMenu.BackColor = Color.White;
-            }
-        }
-        private void ScrollBar_Click(object sender, EventArgs e)
-        {
-            if (TextBox.ScrollBars == ScrollBars.None)
-            {
-                //显示滚动条
-                ScrollBar.Text = "隐藏滑块";
-                TextBox.ScrollBars = ScrollBars.Vertical;
-            }
-            else
-            {
-                //隐藏滚动条
-                ScrollBar.Text = "显示滑块";
-                TextBox.ScrollBars = ScrollBars.None;
-            }
-        }
-        private void OpenBorder_Click(object sender, EventArgs e)
-        {
-            if (FormBorderStyle == FormBorderStyle.Sizable)
-            {
-                //隐藏边框
-                HideBorder.Text = "显示边框";
-                FormBorderStyle = FormBorderStyle.None;
-            }
-            else
-            {
-                //显示边框
-                HideBorder.Text = "隐藏边框";
-                FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
         private void LiteMode_Click(object sender, EventArgs e)

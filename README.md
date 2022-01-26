@@ -5,8 +5,8 @@
 ## 自我介绍:
 **Vight Note**: 一只基于**Winform**框架的轻量级临时文本处理工具
 
-适用平台: Windows x64
-推荐平台: Windows 10 x64
+* 适用平台: Windows x64
+* 推荐平台: Windows 10 x64
 
 ## 注意事项:
 1. 为避免不必要的麻烦，食用前请先阅读注意事项、食用小贴士和用户协议
@@ -23,12 +23,12 @@
 
 ## 下载地址:
 1. Github (首选): [https://github.com/SpaceTimee/Vight-Note/releases](https://github.com/SpaceTimee/Vight-Note/releases)
-2. 蓝奏云 (密码3a57) (大陆推荐): [https://spacetime.lanzoui.com/b01666yti](https://spacetime.lanzoui.com/b01666yti)
-3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
+2. 蓝奏云 (密码1jox) (大陆推荐): [https://spacetime.lanzouy.com/b0176lt1g](https://spacetime.lanzouy.com/b0176lt1g)
+3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/Rn1ih7D7Au4](https://www.aliyundrive.com/s/Rn1ih7D7Au4)
 
 ## 安装方式:
-1. APPX安装包 (首选): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
-2. EXE安装包 (不推荐): 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
+1. APPX安装包 (推荐): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
+2. EXE安装包: 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
 
 ## 使用场景举例:
 1. 查看剪切板中文本的显示效果

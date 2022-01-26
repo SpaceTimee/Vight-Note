@@ -117,88 +117,455 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="TextBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>404, 438</value>
+  </data>
+  <data name="DarkMode.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+B)</value>
+  </data>
+  <data name="Translate.Text" xml:space="preserve">
+    <value>快捷翻译</value>
+  </data>
+  <data name="&gt;&gt;Run.Name" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="&gt;&gt;Close.Name" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Close.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+W)</value>
+  </data>
+  <data name="&gt;&gt;Create.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Import.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="Export.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Alt+S)</value>
+  </data>
+  <data name="&gt;&gt;WhatIsLiteMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LockTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;Export.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FunctionMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>380, 634</value>
+  </data>
+  <data name="TextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>404, 438</value>
+  </data>
+  <data name="ScrollBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="Create.Text" xml:space="preserve">
+    <value>创建窗口</value>
+  </data>
+  <data name="&gt;&gt;DarkMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;Separator5.Name" xml:space="preserve">
+    <value>Separator5</value>
+  </data>
+  <data name="AlwaysTop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;LockTextBox.Name" xml:space="preserve">
+    <value>LockTextBox</value>
+  </data>
+  <data name="&gt;&gt;ImproveOpacity.Name" xml:space="preserve">
+    <value>ImproveOpacity</value>
+  </data>
+  <data name="&gt;&gt;ReduceOpacity.Name" xml:space="preserve">
+    <value>ReduceOpacity</value>
+  </data>
+  <data name="AlwaysTop.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+T)</value>
+  </data>
+  <data name="WhatIsLiteMode.Text" xml:space="preserve">
+    <value>什么是轻模式</value>
+  </data>
+  <data name="About.Text" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="ReduceOpacity.Text" xml:space="preserve">
+    <value>透明度-</value>
+  </data>
+  <data name="LockTextBox.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+L)</value>
+  </data>
+  <data name="&gt;&gt;Help.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DarkMode.Text" xml:space="preserve">
+    <value>夜间模式</value>
+  </data>
+  <data name="ImproveOpacity.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+U)</value>
+  </data>
+  <data name="LiteMode.Text" xml:space="preserve">
+    <value>轻模式</value>
+  </data>
+  <data name="ImproveOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="Search.Text" xml:space="preserve">
+    <value>查找文本</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="PrivacyPolicy.Text" xml:space="preserve">
+    <value>隐私政策</value>
+  </data>
+  <data name="&gt;&gt;HideBorder.Name" xml:space="preserve">
+    <value>HideBorder</value>
+  </data>
+  <data name="Search.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+F)</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TextMenu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="TextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>微软雅黑, 10.5pt</value>
+  </data>
+  <data name="ReduceOpacity.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+D)</value>
+  </data>
+  <data name="AlwaysTop.Text" xml:space="preserve">
+    <value>置顶窗口</value>
+  </data>
+  <data name="&gt;&gt;LiteMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ImproveOpacity.Text" xml:space="preserve">
+    <value>透明度+</value>
+  </data>
+  <data name="&gt;&gt;TextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ScrollBar.Name" xml:space="preserve">
+    <value>ScrollBar</value>
+  </data>
+  <data name="Run.Text" xml:space="preserve">
+    <value>智能运行</value>
+  </data>
+  <data name="&gt;&gt;TextMenu.Name" xml:space="preserve">
+    <value>TextMenu</value>
+  </data>
+  <data name="PrivacyPolicy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 44</value>
+  </data>
+  <data name="ScrollBar.Text" xml:space="preserve">
+    <value>显示滑块</value>
+  </data>
+  <data name="&gt;&gt;TextBox.Name" xml:space="preserve">
+    <value>TextBox</value>
+  </data>
+  <data name="About.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 44</value>
+  </data>
+  <data name="&gt;&gt;Count.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HideBorder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Help.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="ReduceOpacity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;Close.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Search.Name" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Create.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+N)</value>
+  </data>
+  <data name="&gt;&gt;TextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Import.Text" xml:space="preserve">
+    <value>导入文件</value>
+  </data>
+  <data name="&gt;&gt;Save.Name" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>192, 192</value>
+  </data>
+  <data name="&gt;&gt;Separator2.Name" xml:space="preserve">
+    <value>Separator2</value>
+  </data>
+  <data name="Translate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 40</value>
+  </data>
+  <data name="TextBox.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>300, 71</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="TextBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="TextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 130</value>
+  </data>
+  <data name="&gt;&gt;Import.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Update.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LiteMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="Save.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+S)</value>
+  </data>
+  <data name="Export.Text" xml:space="preserve">
+    <value>导出文件</value>
+  </data>
+  <data name="&gt;&gt;DarkMode.Name" xml:space="preserve">
+    <value>DarkMode</value>
+  </data>
+  <data name="Export.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="Close.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="WhatIsLiteMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 44</value>
+  </data>
+  <data name="&gt;&gt;ImproveOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Separator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Separator1.Name" xml:space="preserve">
+    <value>Separator1</value>
+  </data>
+  <data name="&gt;&gt;AlwaysTop.Name" xml:space="preserve">
+    <value>AlwaysTop</value>
+  </data>
+  <data name="&gt;&gt;PrivacyPolicy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Separator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="HideBorder.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+H)</value>
+  </data>
+  <data name="Import.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+O)</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="TextBox.MaxLength" type="System.Int32, mscorlib">
+    <value>2147483647</value>
+  </data>
+  <data name="&gt;&gt;FunctionMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Save.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Import.Name" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="&gt;&gt;Separator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FunctionMenu.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;TextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="DarkMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;Separator2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Help.Name" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="&gt;&gt;About.Name" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="LockTextBox.Text" xml:space="preserve">
+    <value>锁定输入</value>
+  </data>
+  <data name="Close.Text" xml:space="preserve">
+    <value>关闭窗口</value>
+  </data>
+  <data name="&gt;&gt;LiteMode.Name" xml:space="preserve">
+    <value>LiteMode</value>
+  </data>
+  <data name="Save.Text" xml:space="preserve">
+    <value>保存文件</value>
+  </data>
+  <data name="Count.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 40</value>
+  </data>
+  <data name="Search.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;LockTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;PrivacyPolicy.Name" xml:space="preserve">
+    <value>PrivacyPolicy</value>
+  </data>
+  <data name="TextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Separator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 6</value>
+  </data>
+  <data name="Separator2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 6</value>
+  </data>
+  <data name="Separator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 6</value>
+  </data>
+  <data name="Separator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 6</value>
+  </data>
+  <data name="&gt;&gt;Run.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Separator3.Name" xml:space="preserve">
+    <value>Separator3</value>
+  </data>
+  <data name="&gt;&gt;Translate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Translate.Name" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="&gt;&gt;ReduceOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Help.Text" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="Separator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 6</value>
+  </data>
+  <data name="HideBorder.Text" xml:space="preserve">
+    <value>隐藏边框</value>
+  </data>
+  <data name="&gt;&gt;Separator4.Name" xml:space="preserve">
+    <value>Separator4</value>
+  </data>
+  <data name="Update.Size" type="System.Drawing.Size, System.Drawing">
+    <value>291, 44</value>
+  </data>
+  <data name="&gt;&gt;Search.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Run.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 40</value>
+  </data>
+  <data name="&gt;&gt;Export.Name" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="&gt;&gt;Create.Name" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;Separator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Create.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="TextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TextBox.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="ScrollBar.ShortcutKeyDisplayString" xml:space="preserve">
+    <value>(Ctrl+Alt+R)</value>
+  </data>
+  <data name="Save.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="&gt;&gt;FunctionMenu.Name" xml:space="preserve">
+    <value>FunctionMenu</value>
+  </data>
+  <data name="&gt;&gt;WhatIsLiteMode.Name" xml:space="preserve">
+    <value>WhatIsLiteMode</value>
+  </data>
+  <data name="&gt;&gt;About.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;AlwaysTop.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Count.Name" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="Count.Text" xml:space="preserve">
+    <value>字数统计</value>
+  </data>
+  <data name="Update.Text" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="HideBorder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>379, 40</value>
+  </data>
+  <data name="TextBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 6</value>
+  </data>
+  <data name="&gt;&gt;Update.Name" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="&gt;&gt;ScrollBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="TextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>315, 22</value>
   </metadata>
   <metadata name="FunctionMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 22</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="LiteMode.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
-  <metadata name="TextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>315, 22</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="TextBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
