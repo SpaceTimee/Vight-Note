@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Vight_Note.Forms
@@ -14,14 +15,32 @@ namespace Vight_Note.Forms
         private int START_INDEX = -1, SELECT_LENGTH = 0;
         private int SEARCH_NUM = 0;
 
-        public SearchForm(MainForm mainForm)
+        public SearchForm(MainForm mainForm, bool isDarkMode)
         {
             InitializeComponent();
+
+            //设定暗色模式
+            CheckDarkMode(isDarkMode);
 
             //记录mainForm
             Define.MAIN_FORM = mainForm;
         }
+        private void CheckDarkMode(bool isDarkMode)
+        {
+            if (isDarkMode)
+            {
+                BackColor = Color.Black;
+                ForeColor = Color.Gray;
+                SearchBox.BackColor = Color.Black;
+                SearchBox.ForeColor = Color.Gray;
+                SearchButton.BackColor = Color.Gray;
+            }
+        }
 
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+            SearchButton.BackgroundImage = Vight_Note.Properties.Resources.Search;
+        }
         private void SearchButton_Click(object sender, EventArgs e)
         {
             //输入结果为空
@@ -58,6 +77,7 @@ namespace Vight_Note.Forms
                 //有查找结果
                 Define.MAIN_FORM.TextBox.Select(START_INDEX, SELECT_LENGTH);
                 Text = $"查找文本 (No.{++SEARCH_NUM})";
+                SearchButton.BackgroundImage = Vight_Note.Properties.Resources.Reduce;
             }
             else
             {
@@ -79,6 +99,7 @@ namespace Vight_Note.Forms
                 }
             }
         }
+
         //热键
         private void SearchForm_KeyDown(object sender, KeyEventArgs e)
         {

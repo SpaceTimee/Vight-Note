@@ -67,7 +67,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -133,7 +133,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="Properties\Settings.cs" />
     <Compile Include="Forms\UpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -175,12 +175,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Vight Note_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Properties\App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="README.md" />
     <None Include="Resources\Vight Note Privacy Policy.txt" />
     <None Include="Resources\Import.png" />
     <None Include="Resources\Close.png" />
@@ -205,6 +205,7 @@
     <None Include="Resources\Run.png" />
     <None Include="Resources\Translate.png" />
     <None Include="Resources\Search.png" />
+    <None Include="Resources\Settings.png" />
     <Content Include="Vight Note Logo.ico" />
   </ItemGroup>
   <ItemGroup>

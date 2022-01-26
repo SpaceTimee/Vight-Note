@@ -48,7 +48,7 @@ namespace Vight_Note
             if (args.Length >= 1)
             {
                 FILE_PATH = args[0];
-                if(checkLiteModeTask != null)
+                if (checkLiteModeTask != null)
                     Task.WaitAll(checkLiteModeTask);
                 Task.Run(ImportFile);
             }
@@ -130,8 +130,6 @@ $@"在我的印象里，这似乎是我第一次见到你
         private void Close_Click(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
-
-            //Close(); //旧版解决方案: 只关窗口(会出现杀不干净的情况)
         }
         private void Save_Click(object sender, EventArgs e)
         {
@@ -202,7 +200,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         private void Search_Click(object sender, EventArgs e)
         {
-            SearchForm seachForm = new SearchForm(this);
+            SearchForm seachForm = new SearchForm(this, DarkMode.Checked);
             seachForm.ShowDialog();
         }
         private void ImproveOpacity_Click(object sender, EventArgs e)
