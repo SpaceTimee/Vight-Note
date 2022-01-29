@@ -43,18 +43,16 @@ namespace Vight_Note
             InitializeComponent();
 
             //欢迎界面和界面初始化
-            Task checkLiteModeTask = MainFormInit();
+            MainFormInit();
 
             //拖拽至图标打开文件
             if (args.Length >= 1)
             {
                 FILE_PATH = args[0];
-                if (checkLiteModeTask != null)
-                    Task.WaitAll(checkLiteModeTask);
-                Task.Run(ImportFile);
+                ImportFile();
             }
         }
-        private Task MainFormInit()
+        private void MainFormInit()
         {
             //判断IsFirstRun的值
             if (Properties.Settings.Default.IsFirstRun)
@@ -65,12 +63,10 @@ namespace Vight_Note
             else
             {
                 //不是第一次运行
-                Task.Run(CheckDarkMode);
-                Task.Run(CheckOpacity);
-                return Task.Run(CheckLiteMode);
+                CheckDarkMode();
+                CheckOpacity();
+                CheckLiteMode();
             }
-
-            return null;
         }
         private static void Welcome()
         {
@@ -276,13 +272,21 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (TextBox.ScrollBars == ScrollBars.None)
             {
                 //显示滚动条
-                ScrollBar.Text = "隐藏滑块";
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    ScrollBar.Text = "隐藏滑块";
+                else
+                    ScrollBar.Text = "HideScroller";
+
                 TextBox.ScrollBars = ScrollBars.Vertical;
             }
             else
             {
                 //隐藏滚动条
-                ScrollBar.Text = "显示滑块";
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    ScrollBar.Text = "显示滑块";
+                else
+                    ScrollBar.Text = "ShowScroller";
+
                 TextBox.ScrollBars = ScrollBars.None;
             }
         }
@@ -291,13 +295,21 @@ $@"在我的印象里，这似乎是我第一次见到你
             if (FormBorderStyle == FormBorderStyle.Sizable)
             {
                 //隐藏边框
-                HideBorder.Text = "显示边框";
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    HideBorder.Text = "显示边框";
+                else
+                    HideBorder.Text = "ShowBorder";
+
                 FormBorderStyle = FormBorderStyle.None;
             }
             else
             {
                 //显示边框
-                HideBorder.Text = "隐藏边框";
+                if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name != "en-US")
+                    HideBorder.Text = "隐藏边框";
+                else
+                    HideBorder.Text = "HideBorder";
+
                 FormBorderStyle = FormBorderStyle.Sizable;
             }
         }
@@ -403,7 +415,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             {
                 if (TextBox.SelectionLength > 3628)
                 {
-                    processStartInfo.FileName = Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText.Substring(0, 3628));
+                    processStartInfo.FileName = Define.BAIDU_SEARCH_API + Uri.EscapeDataString(TextBox.SelectedText[..3628]);
                     Process.Start(processStartInfo);    //最长32659(编码后汉字长度x9)
                 }
                 else
@@ -418,7 +430,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             //百度翻译
             if (TextBox.SelectionLength > 32650)
             {
-                processStartInfo.FileName = Define.BAIDU_TRANSLATE_API + TextBox.SelectedText.Substring(0, 32655);
+                processStartInfo.FileName = Define.BAIDU_TRANSLATE_API + TextBox.SelectedText[..32655];
                 Process.Start(processStartInfo);    //最长32655
             }
             else
