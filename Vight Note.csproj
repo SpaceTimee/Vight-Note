@@ -61,7 +61,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <PropertyGroup>
-    <ApplicationIcon>Vight Note Logo.ico</ApplicationIcon>
+    <ApplicationIcon>Vight Note Logo 256x256.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -209,6 +209,7 @@
     <None Include="Resources\Translate.png" />
     <None Include="Resources\Search.png" />
     <None Include="Resources\Settings.png" />
+    <Content Include="Vight Note Logo 256x256.ico" />
     <Content Include="Vight Note Logo.ico" />
   </ItemGroup>
   <ItemGroup>
