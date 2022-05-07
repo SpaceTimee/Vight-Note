@@ -3,15 +3,15 @@
 </br>
 
 ## 自我介绍
-**Vight Note**: 一只基于**Winform**框架的轻量级临时文本处理工具
+**Vight Note**: 一只基于 **Winform** 框架的轻量级临时文本处理工具
 
 * 适用平台: Windows x64
 * 推荐平台: Windows 11 x64
 
 ## 注意事项
 1. 为避免不必要的麻烦，食用前请先阅读注意事项、食用小贴士和用户协议
-2. Vight Note仍处于开发阶段，但每个正式版发布前会尽量确保其稳定可用
-3. Github Release中会保留目前能够使用的所有版本，但强烈推荐使用最新版
+2. Vight Note 仍处于开发阶段，但每个正式版发布前会尽量确保其稳定可用
+3. Github Release 中会保留目前能够使用的所有版本，但强烈推荐使用最新版
 4. 所有功能全部集合在右键菜单(强调)
 
 ## 食用小贴士
@@ -27,8 +27,8 @@
 3. 阿里云盘 (测试): [https://www.aliyundrive.com/s/LS3xuoNeCZG](https://www.aliyundrive.com/s/LS3xuoNeCZG)
 
 ## 安装方式
-1. APPX安装包 (首选): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
-2. EXE安装包 (不推荐): 下载Vight Note Setup.exe并双击运行->按照提示设置即可安装
+1. APPX 安装包 (首选): [Github Wiki](https://github.com/SpaceTimee/Vight-Note/wiki/Vight-Note-APPX%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)
+2. EXE 安装包 (不推荐): 下载 Vight Note Setup.exe 并双击运行 -> 按照提示设置即可安装
 
 ## 使用场景举例
 1. 查看剪切板中文本的显示效果
