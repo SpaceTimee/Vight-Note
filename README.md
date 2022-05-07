@@ -3,6 +3,8 @@
 </br>
 
 ## 自我介绍:
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSpaceTimee%2FVight-Note.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSpaceTimee%2FVight-Note?ref=badge_shield)
+
 **Vight Note**: 一只基于**Winform**框架的轻量级临时文本处理工具
 
 * 适用平台: Windows x64
@@ -44,3 +46,7 @@
 **Zeus6_6@163.com**
 
 •ᴗ•
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSpaceTimee%2FVight-Note.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSpaceTimee%2FVight-Note?ref=badge_large)
