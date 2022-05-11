@@ -26,7 +26,7 @@ namespace Vight_Note
                                             @"^([a-zA-Z].)[a-zA-Z0-9\-\.]+\.(" +
                                             @"com|edu|gov|mil|net|org|biz|info|name|museum|us|ca|uk|cc|int|arpa|asia|pro|coop|aero|tv|top|xin|xyz|vip|cn|mobi|ru|de|pl|eu|io|jp|club|au|post|me|guru|expert|tw|mo|hk|fr|ar|pk|mv|in|it|ws|sh|my|cd|ac|li|co|cm|win|red|rec|travel|wang|ch|dj|er|ee|es|is|kr|mm|mn|no|ne|to|tr|za|ml|ga|xxx|porn|adult|cyou|buzz|monster|icu|shop|best|site|live|online|pw|cloud|website|life|store|fun|app|today|uno|space|world|one|link|work|email|nl|trade|bid|stream|men|art|party|date|dev|tech|church|rocks|digital|download|moe|agency|network|click|fail|news|cool|vegas|blog|review|company|la|design|services|golf|exposed|team|ltd|help|zone|loan|wtf|media|solutions|games|directory|center|care|fyi|group|ooo|science|systems|works|city|pet|run|tips|studio|guide|cash|at|support|ninja|plus|rip|marketing|vin|reisen|tools|finance|immo|wiki|viajes|global|mx|promo|recipes|photos|academy|dog|pink|money|chat|casa|cafe|ink|foundation|faith|webcam|house|technology|photography|video|blue|farm|codes|realty|tel|land|show|business|international|social|sbs|skin|page|london|health|hiv|bond|vote|autos|rest|limo|hospital|gay|bar|game|fans|ph|study|cooking|glass|place|rent|shoes|tires|wedding|cab|camp|beer|menu|movie|fish|sexy|gifts|part|mom|green|moda|baby|navy|loans|engineering|computer|camera|barga|film|kitchen|supply|pics|haus|university|fit|cheap|vet|black|law|lol|tax|bio|sale|earth|kim|love|software|fitness|llc|school|pub|deals|style|domains|band|host|direct|shopping|tube|ist|mba|photo|energy|training|taxi|gift|wine|town|bike|toys|ski|poker|yoga|parts|solar|engineer|garden|observer|sucks|hosting|bingo|christmas|gives|horse|insure|diet|fishing|whoswho|tickets|boats|flowers|storage|cfd|inc|quest|luxe|security" +
                                             @")(\:[0-9]+)*(/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*$";
-            #endregion
+            #endregion URL的正则表达式 (URL_REGEX)
 
             public const string BAIDU_SEARCH_API = @"https://www.baidu.com/s?wd=";
             public const string BAIDU_TRANSLATE_API = @"https://fanyi.baidu.com/#zh/en/";
@@ -35,7 +35,7 @@ namespace Vight_Note
         }
 
         private static bool CHANGE_MARK = false;
-        private static string FILE_PATH = @"";
+        private static string FILE_PATH = string.Empty;
 
         public MainForm(string[] args)
         {
@@ -123,14 +123,11 @@ $@"在我的印象里，这似乎是我第一次见到你
             else
                 MessageBox.Show("创建失败，可能是文件路径损坏导致的，重新安装可能可以解决哦");
         }
-        private void Close_Click(object sender, EventArgs e)
-        {
-            System.Environment.Exit(0);
-        }
+        private void Close_Click(object sender, EventArgs e) => Environment.Exit(0);
         private void Save_Click(object sender, EventArgs e)
         {
             //显示文件保存窗口，向用户获取保存路径
-            if (sender == Export || FILE_PATH == "")
+            if (sender == Export || string.IsNullOrWhiteSpace(FILE_PATH))
             {
                 SaveFileDialog saveDialog = new SaveFileDialog();
 
@@ -145,7 +142,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 saveDialog.CheckPathExists = true;  //检查路径是否正确
                 saveDialog.SupportMultiDottedExtensions = true; //支持多拓展名
                 saveDialog.AutoUpgradeEnabled = true;   //自动升级对话框样式
-                #endregion
+                #endregion 配置saveDialog的参数
 
                 if (saveDialog.ShowDialog() != DialogResult.OK)
                     return;
@@ -164,10 +161,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             Text = Path.GetFileName(FILE_PATH);
             CHANGE_MARK = false;
         }
-        private void Export_Click(object sender, EventArgs e)
-        {
-            Save_Click(Export, new EventArgs());
-        }
+        private void Export_Click(object sender, EventArgs e) => Save_Click(Export, new EventArgs());
         private void Import_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
@@ -186,7 +180,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             openDialog.ShowReadOnly = false;    //不向用户显示只读选项
             openDialog.SupportMultiDottedExtensions = true; //支持多拓展名
             openDialog.AutoUpgradeEnabled = true;   //自动升级对话框样式
-            #endregion
+            #endregion 配置openDialog的参数
 
             if (openDialog.ShowDialog() == DialogResult.OK)
             {
@@ -194,11 +188,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 ImportFile();
             }
         }
-        private void Search_Click(object sender, EventArgs e)
-        {
-            SearchForm seachForm = new SearchForm(this, DarkMode.Checked);
-            seachForm.ShowDialog();
-        }
+        private void Search_Click(object sender, EventArgs e) => new SearchForm(this, DarkMode.Checked).ShowDialog();
         private void ImproveOpacity_Click(object sender, EventArgs e)
         {
             if (Opacity >= 0.2)
@@ -330,20 +320,9 @@ $@"在我的印象里，这似乎是我第一次见到你
                 LiteShortcut(false);
             }
         }
-        private void Update_Click(object sender, EventArgs e)
-        {
-            UpdateForm updateForm = new UpdateForm(DarkMode.Checked, LiteMode.Checked);
-            updateForm.ShowDialog();
-        }
-        private void About_Click(object sender, EventArgs e)
-        {
-            AboutForm aboutForm = new AboutForm(DarkMode.Checked);
-            aboutForm.ShowDialog();
-        }
-        private void WhatIsLiteMode_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，提升办公效率，建议开启");
-        }
+        private void Update_Click(object sender, EventArgs e) => new UpdateForm(DarkMode.Checked, LiteMode.Checked).ShowDialog();
+        private void About_Click(object sender, EventArgs e) => new AboutForm(DarkMode.Checked).ShowDialog();
+        private void WhatIsLiteMode_Click(object sender, EventArgs e) => MessageBox.Show($@"在轻模式下{Define.NAME}会智能优化提示信息，提升办公效率，建议开启");
         private async void PrivacyPolicy_Click(object sender, EventArgs e)
         {
             //检查与Thought服务器的连接
@@ -377,10 +356,7 @@ $@"在我的印象里，这似乎是我第一次见到你
             }
         }
 
-        private void Count_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(Convert.ToString(TextBox.SelectionLength), "字数统计");
-        }
+        private void Count_Click(object sender, EventArgs e) => MessageBox.Show(Convert.ToString(TextBox.SelectionLength), "字数统计");
         private void Run_Click(object sender, EventArgs e)
         {
             try
@@ -544,7 +520,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 MessageBox.Show("请不要往我里面塞奇怪的东西...");
             }
 
-            if (!LiteMode.Checked && TextBox.Text != "")
+            if (!LiteMode.Checked && !string.IsNullOrEmpty(TextBox.Text))
             {
                 //便签有内容，提示用户是否覆盖
                 MessageBoxButtons msgButton = MessageBoxButtons.YesNo;
@@ -565,10 +541,7 @@ $@"在我的印象里，这似乎是我第一次见到你
         }
         //字符串格式匹配
         private bool CheckStrFormat(string regexRule, string strValue)
-        {
-            Regex regex = new Regex(regexRule);
-            return regex.IsMatch(strValue);
-        }
+        { return new Regex(regexRule).IsMatch(strValue); }
         //Ping检查连接
         private async Task<bool> CheckConnect()
         {
@@ -579,10 +552,7 @@ $@"在我的印象里，这似乎是我第一次见到你
                 if (reply.Status != IPStatus.Success)   //连接失败
                     throw new Exception("NetworkError");
             }
-            catch
-            {
-                return false;
-            }
+            catch { return false; }
 
             return true;    //连接成功
         }

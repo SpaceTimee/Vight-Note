@@ -26,7 +26,7 @@ namespace Vight_Note
             public static readonly string EXE_PATH = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Vight Note Setup.exe";
 
             public static bool IS_LITEMODE = false;
-            public static string RELEASE_JSON = @"";
+            public static string RELEASE_JSON = string.Empty;
         }
 
         private static readonly HttpClient client = new HttpClient();
@@ -68,7 +68,7 @@ namespace Vight_Note
         private async void GithubButton_Click(object sender, EventArgs e)
         {
             //没有获取过Json
-            if (Define.RELEASE_JSON == "")
+            if (string.IsNullOrWhiteSpace(Define.RELEASE_JSON))
                 if (!await GithubGetReleaseJson())
                     return;
 
@@ -94,14 +94,11 @@ namespace Vight_Note
         {
             if (!Define.IS_LITEMODE)
             {
-                if (MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_LANZOU_PASSWORD}", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                if (MessageBox.Show($"即将打开光速下载页面，记住我们的密码暗号：{Define.RELEASE_LANZOU_PASSWORD}", string.Empty, MessageBoxButtons.OKCancel) == DialogResult.Cancel)
                     return;
             }
-            else
-            {
-                if (MessageBox.Show($"密码：{Define.RELEASE_LANZOU_PASSWORD}", "", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
-                    return;
-            }
+            else if (MessageBox.Show($"密码：{Define.RELEASE_LANZOU_PASSWORD}", string.Empty, MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+                return;
 
             Process.Start(Define.RELEASE_LANZOU_URL);
 
@@ -139,7 +136,7 @@ namespace Vight_Note
         {
             TipLabel.Text = "正在获取版本号";
             Define.RELEASE_JSON = await GetReleaseJson();
-            if (Define.RELEASE_JSON == "")
+            if (string.IsNullOrWhiteSpace(Define.RELEASE_JSON))
             {
                 TipLabel.Text = "版本号获取失败，请重试";
                 return false;
@@ -168,7 +165,7 @@ namespace Vight_Note
             TipLabel.Text = "正在获取版本号";
             Define.RELEASE_JSON = await GetReleaseJson();
 
-            if (Define.RELEASE_JSON == "")
+            if (string.IsNullOrWhiteSpace(Define.RELEASE_JSON))
             {
                 TipLabel.Text = "版本号获取失败，请重试";
                 return false;
@@ -238,10 +235,7 @@ namespace Vight_Note
             {
                 return await client.GetStringAsync(Define.RELEASE_GITHUB_API_URL);  //获取Json并返回
             }
-            catch   //(HttpRequestException e)
-            {
-                return "";
-            }
+            catch { return string.Empty; }
         }
         //反序列化获取最新版本号
         private string GetReleaseVersion()
@@ -278,10 +272,7 @@ namespace Vight_Note
                 saver.Write(bytes, 0, bytes.Length);
                 saver.Close();
             }
-            catch   //(HttpRequestException e)
-            {
-                return false;
-            }
+            catch { return false; }
 
             return true;
         }
@@ -297,10 +288,7 @@ namespace Vight_Note
             {
                 ZipFile.ExtractToDirectory(Define.APPX_ZIP_PATH, Define.APPX_PATH);
             }
-            catch
-            {
-                return false;
-            }
+            catch { return false; }
 
             return true;
         }

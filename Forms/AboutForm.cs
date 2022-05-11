@@ -54,18 +54,9 @@ namespace Vight_Note
             }
         }
 
-        private void MainPageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(Define.MAINPAGE_URL);
-        }
-        private void OpenSourceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(Define.OPENSOURCE_URL);
-        }
-        private void EmailLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start("mailto:" + Define.EMAIL);
-        }
+        private void MainPageLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start(Define.MAINPAGE_URL);
+        private void OpenSourceLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start(Define.OPENSOURCE_URL);
+        private void EmailLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) => Process.Start("mailto:" + Define.EMAIL);
 
         //热键
         private void AboutForm_KeyDown(object sender, KeyEventArgs e)

@@ -11,7 +11,7 @@ namespace Vight_Note.Forms
             public static MainForm MAIN_FORM;
         }
 
-        private string SEARCH_TEXT = "";
+        private string SEARCH_TEXT = string.Empty;
         private int START_INDEX = -1, SELECT_LENGTH = 0;
         private int SEARCH_NUM = 0;
 
@@ -44,7 +44,7 @@ namespace Vight_Note.Forms
         private void SearchButton_Click(object sender, EventArgs e)
         {
             //输入结果为空
-            if (SearchBox.Text.Trim() == "")
+            if (string.IsNullOrEmpty(SearchBox.Text))
             {
                 Define.MAIN_FORM.TextBox.Select(0, 0);
                 Text = $"查找文本";
@@ -62,9 +62,9 @@ namespace Vight_Note.Forms
         //一次新的查找
         private void NewSearch()
         {
-            if (SearchBox.Text.Trim() != SEARCH_TEXT)
+            if (SearchBox.Text != SEARCH_TEXT)
             {
-                SEARCH_TEXT = SearchBox.Text.Trim();
+                SEARCH_TEXT = SearchBox.Text;
                 START_INDEX = -1;
                 SELECT_LENGTH = SEARCH_TEXT.Length;
                 SEARCH_NUM = 0;
